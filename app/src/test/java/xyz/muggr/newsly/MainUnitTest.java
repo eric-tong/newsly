@@ -11,7 +11,7 @@ public class MainUnitTest {
     public void getArticles() {
         try {
             for (Article article : RedditManager.getArticles())
-                System.out.print(article.getFlair() + "\n");
+                System.out.print(article.getTitle() + "\n");
         } catch (Exception e) {
             e.printStackTrace();
         }

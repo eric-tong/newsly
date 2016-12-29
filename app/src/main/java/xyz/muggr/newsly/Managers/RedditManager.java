@@ -21,7 +21,7 @@ public class RedditManager {
         // Open connection
         URLConnection connection = (new URL("https://www.reddit.com/r/worldnews/.json")).openConnection();
         connection.setRequestProperty("User-Agent",
-                String.format("User-Agent: android:xyz.muggr.newsly:v%1$s (by /u/regimme)", BuildConfig.VERSION_NAME));
+                String.format("android:xyz.muggr.newsly:v%1$s (by /u/regimme)", BuildConfig.VERSION_NAME));
         connection.setConnectTimeout(10000);
         connection.setReadTimeout(10000);
         connection.connect();
@@ -37,7 +37,9 @@ public class RedditManager {
         ArticleList articles = new ArticleList();
         JSONArray listingJson = new JSONObject(jsonBuilder.toString()).getJSONObject("data").getJSONArray("children");
         for (int i = 0; i < listingJson.length(); i++) {
-            articles.add(new Article(listingJson.getJSONObject(i).getJSONObject("data")));
+            JSONObject articleJson = listingJson.getJSONObject(i);
+            if (articleJson.getString("kind").equals("t3"))
+                articles.add(new Article(articleJson.getJSONObject("data")));
         }
 
         return articles;

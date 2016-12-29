@@ -18,14 +18,14 @@ public class Article {
     public Article() {
     }
 
-    public Article(JSONObject articleJson) throws JSONException {
-        setTitle(articleJson.getString("title"));
-        setCreated(articleJson.getLong("created_utc"));
-        setDomain(articleJson.getString("domain"));
-        setNsfw(articleJson.getBoolean("over_18"));
-        setUrl(articleJson.getString("url"));
-        if (!articleJson.isNull("link_flair_text"))
-            setFlair(articleJson.getString("link_flair_text"));
+    public Article(JSONObject articleData) throws JSONException {
+        setTitle(articleData.getString("title"));
+        setCreated(articleData.getLong("created_utc"));
+        setDomain(articleData.getString("domain"));
+        setNsfw(articleData.getBoolean("over_18"));
+        setUrl(articleData.getString("url"));
+        if (!articleData.isNull("link_flair_text"))
+            setFlair(articleData.getString("link_flair_text"));
     }
 
 
