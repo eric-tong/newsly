@@ -12,7 +12,7 @@ public class Article {
     boolean isNsfw;
     String flair;
 
-    //region CONSTRUCTORS
+    //region Constructors
     //=======================================================================================
 
     public Article() {
@@ -20,7 +20,7 @@ public class Article {
 
     public Article(JSONObject articleJson) throws JSONException {
         setTitle(articleJson.getString("title"));
-        setCreated(articleJson.getLong("created"));
+        setCreated(articleJson.getLong("created_utc"));
         setDomain(articleJson.getString("domain"));
         setNsfw(articleJson.getBoolean("over_18"));
         setUrl(articleJson.getString("url"));
