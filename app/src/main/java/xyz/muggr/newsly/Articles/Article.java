@@ -1,5 +1,8 @@
 package xyz.muggr.newsly.Articles;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Article {
 
     String title;
@@ -8,6 +11,26 @@ public class Article {
     String url;
     boolean isNsfw;
     String flair;
+
+    //region CONSTRUCTORS
+    //=======================================================================================
+
+    public Article() {
+    }
+
+    public Article(JSONObject articleJson) throws JSONException {
+        setTitle(articleJson.getString("title"));
+        setCreated(articleJson.getLong("created"));
+        setDomain(articleJson.getString("domain"));
+        setNsfw(articleJson.getBoolean("over_18"));
+        setUrl(articleJson.getString("url"));
+        if (!articleJson.isNull("link_flair_text"))
+            setFlair(articleJson.getString("link_flair_text"));
+    }
+
+
+    //=======================================================================================
+    //endregion
 
     //region Getters/Setters
     //=======================================================================================

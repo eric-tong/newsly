@@ -37,16 +37,7 @@ public class RedditManager {
         ArticleList articles = new ArticleList();
         JSONArray listingJson = new JSONObject(jsonBuilder.toString()).getJSONObject("data").getJSONArray("children");
         for (int i = 0; i < listingJson.length(); i++) {
-            JSONObject articleJson = listingJson.getJSONObject(i).getJSONObject("data");
-            Article article = new Article();
-            article.setTitle(articleJson.getString("title"));
-            article.setCreated(articleJson.getLong("created"));
-            article.setDomain(articleJson.getString("domain"));
-            article.setNsfw(articleJson.getBoolean("over_18"));
-            article.setUrl(articleJson.getString("url"));
-            if (!articleJson.isNull("link_flair_text"))
-                article.setFlair(articleJson.getString("link_flair_text"));
-            articles.add(article);
+            articles.add(new Article(listingJson.getJSONObject(i).getJSONObject("data")));
         }
 
         return articles;
