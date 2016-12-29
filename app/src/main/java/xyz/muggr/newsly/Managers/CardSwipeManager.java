@@ -114,7 +114,7 @@ public class CardSwipeManager implements View.OnTouchListener {
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
                         resetCards();
-                        activity.swipe(flingState);
+                        activity.onSwipe(flingState);
                         touchState = State.NONE;
                         flingState = State.NONE;
                     }
@@ -250,7 +250,7 @@ public class CardSwipeManager implements View.OnTouchListener {
 
     public interface SwipableCards {
         int DP_1 = 3;
-        void swipe(int state);
+        void onSwipe(int state);
     }
 
     //=======================================================================================

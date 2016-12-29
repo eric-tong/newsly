@@ -13,7 +13,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     //region Constructors
     //=======================================================================================
 
-    private DatabaseManager(Context context) {
+    public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -49,7 +49,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     //=======================================================================================
     //endregion
 
-    //region keys
+    //region Keys
     //=======================================================================================
 
     public static final class Table {

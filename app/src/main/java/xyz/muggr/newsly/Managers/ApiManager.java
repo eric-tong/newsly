@@ -14,7 +14,7 @@ import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.Articles.ArticleList;
 import xyz.muggr.newsly.BuildConfig;
 
-public class RedditManager {
+public class ApiManager {
 
     public static ArticleList getArticles() throws IOException, JSONException {
 
