@@ -10,8 +10,9 @@ public class MainUnitTest {
     @Test
     public void getArticles() {
         try {
-            for (Article article : RedditManager.getArticles())
-                System.out.print(article.getTitle() + "\n");
+            for (Article article : RedditManager.getArticles()) {
+                System.out.print(article.getCreated() + "\n");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

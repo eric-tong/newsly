@@ -19,7 +19,7 @@ public class RedditManager {
     public static ArticleList getArticles() throws IOException, JSONException {
 
         // Open connection
-        URLConnection connection = (new URL("https://www.reddit.com/r/worldnews/.json")).openConnection();
+        URLConnection connection = (new URL("https://www.reddit.com/r/worldnews/.json?limit=100")).openConnection();
         connection.setRequestProperty("User-Agent",
                 String.format("android:xyz.muggr.newsly:v%1$s (by /u/regimme)", BuildConfig.VERSION_NAME));
         connection.setConnectTimeout(10000);
