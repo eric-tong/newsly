@@ -1,23 +1,29 @@
 package xyz.muggr.newsly.Managers;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import xyz.muggr.newsly.Articles.Article;
+import xyz.muggr.newsly.Articles.ArticleList;
 import xyz.muggr.newsly.BuildConfig;
 
 public class RedditManager {
 
-    public static String getArticles() throws IOException {
+    public static ArticleList getArticles() throws IOException, JSONException {
 
         // Open connection
         URLConnection connection = (new URL("https://www.reddit.com/r/worldnews/.json")).openConnection();
         connection.setRequestProperty("User-Agent",
                 String.format("User-Agent: android:xyz.muggr.newsly:v%1$s (by /u/regimme)", BuildConfig.VERSION_NAME));
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(5000);
+        connection.setConnectTimeout(10000);
+        connection.setReadTimeout(10000);
         connection.connect();
 
         // Read inputStream
@@ -27,8 +33,23 @@ public class RedditManager {
         while ((inputString = streamReader.readLine()) != null)
             jsonBuilder.append(inputString);
 
-        return jsonBuilder.toString();
+        // Parse json to ArticleList
+        ArticleList articles = new ArticleList();
+        JSONArray listingJson = new JSONObject(jsonBuilder.toString()).getJSONObject("data").getJSONArray("children");
+        for (int i = 0; i < listingJson.length(); i++) {
+            JSONObject articleJson = listingJson.getJSONObject(i).getJSONObject("data");
+            Article article = new Article();
+            article.setTitle(articleJson.getString("title"));
+            article.setCreated(articleJson.getLong("created"));
+            article.setDomain(articleJson.getString("domain"));
+            article.setNsfw(articleJson.getBoolean("over_18"));
+            article.setUrl(articleJson.getString("url"));
+            if (!articleJson.isNull("link_flair_text"))
+                article.setFlair(articleJson.getString("link_flair_text"));
+            articles.add(article);
+        }
 
+        return articles;
     }
 
 }
