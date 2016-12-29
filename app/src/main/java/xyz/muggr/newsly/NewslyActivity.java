@@ -37,4 +37,14 @@ public class NewslyActivity extends AppCompatActivity {
     //=======================================================================================
     //endregion
 
+    //region Math utility methods
+    //=======================================================================================
+
+    public static double pythagoras(float a, float b) {
+        return Math.sqrt(a * a + b * b);
+    }
+
+    //=======================================================================================
+    //endregion
+
 }
