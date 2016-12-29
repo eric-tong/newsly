@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xyz.muggr.newsly.HomepageActivity">
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="top|left"
+        android:onClick="onButtonClick"
+        android:src="@drawable/abc_ic_menu_overflow_material"
+        android:padding="12dp" />
+
+    <xyz.muggr.newsly.Views.ArticleCard
+        android:id="@+id/act_homepage_transition_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="56dp" />
+
+    <xyz.muggr.newsly.Views.ArticleCard
+        android:id="@+id/act_homepage_swipable_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="56dp" />
+
+</FrameLayout>

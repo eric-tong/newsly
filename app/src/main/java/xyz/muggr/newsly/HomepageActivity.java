@@ -1,13 +1,12 @@
 package xyz.muggr.newsly;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class HomepageActivity extends AppCompatActivity {
+public class HomepageActivity extends NewslyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
+        setContentView(R.layout.act_homepage);
     }
 }
