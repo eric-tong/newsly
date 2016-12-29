@@ -50,7 +50,7 @@ public class HomepageActivity extends NewslyActivity implements CardSwipeManager
 
     @Override
     public void onSwipe(int state) {
-        //productQueueHandler.dismiss(state == CardSwipeHandler.State.RIGHT ? Product.Status.ACCEPTED : Product.Status.REJECTED);
+        articleQueueManager.dismiss(state);
         articleQueueManager.load(this);
     }
 

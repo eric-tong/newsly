@@ -103,8 +103,10 @@ public class ArticleCard extends RelativeLayout {
     //region Setters
     //=======================================================================================
 
-    public void setArticle(Article product) {
-        this.currentArticle = product;
+    public void setArticle(Article article) {
+        this.currentArticle = article;
+
+        titleTv.setText(article.getTitle());
     }
 
     //=======================================================================================

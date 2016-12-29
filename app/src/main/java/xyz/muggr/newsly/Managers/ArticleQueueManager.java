@@ -2,6 +2,7 @@ package xyz.muggr.newsly.Managers;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import xyz.muggr.newsly.Articles.ArticleList;
 import xyz.muggr.newsly.BuildConfig;
@@ -47,19 +48,28 @@ public class ArticleQueueManager {
                 @Override
                 protected void onPostExecute(ArticleList articleList) {
                     super.onPostExecute(articleList);
-                    if (articleList != null)
+                    if (articleList != null) {
                         articleQueue.addAll(articleList);
+                    }
                     listener.onArticleQueueLoaded(articleQueue);
+
+                    if (BuildConfig.DEBUG)
+                        for (int i = 0; i < articleQueue.size(); i++) {
+                            Log.d(
+                                    String.format("Queue %02d", i),
+                                    articleQueue.get(i).getTitle()
+                            );
+                        }
                 }
 
             }.execute();
+        else
+            listener.onArticleQueueLoaded(articleQueue);
 
     }
 
-    public void dismiss(int status) {
+    public void dismiss(int state) {
         if (!articleQueue.isEmpty()) {
-
-            // REMOVE FIRST ITEM FROM QUEUE
             articleQueue.remove(0);
         }
     }
