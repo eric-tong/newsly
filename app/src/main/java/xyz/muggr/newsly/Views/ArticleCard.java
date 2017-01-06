@@ -24,6 +24,7 @@ public class ArticleCard extends FrameLayout {
 
     private ImageView heroIv;
     private TextView headlineTv;
+    private TextView tagTv;
     private TextView domainTv;
     private TextView flagTv;
 
@@ -78,6 +79,7 @@ public class ArticleCard extends FrameLayout {
         // GET VIEWS
         heroIv = (ImageView) findViewById(R.id.vie_card_article_hero_iv);
         headlineTv = (TextView) findViewById(R.id.vie_card_article_title_tv);
+        tagTv = (TextView) findViewById(R.id.vie_card_article_tag_tv);
         domainTv = (TextView) findViewById(R.id.vie_card_article_domain_tv);
         flagTv = (TextView) findViewById(R.id.vie_card_article_flag_tv);
 
@@ -118,6 +120,14 @@ public class ArticleCard extends FrameLayout {
         // Set content
         headlineTv.setText(article.getHeadline());
         domainTv.setText(article.getDomain());
+
+        // Set tag
+        if (article.getTag() != null) {
+            tagTv.setVisibility(View.VISIBLE);
+            tagTv.setText(article.getTag());
+        } else {
+            tagTv.setVisibility(View.GONE);
+        }
 
         // Set flags
         if (article.getFlags() > 0) {
