@@ -77,7 +77,7 @@ public class ApiManager {
     public static ArticleList getRedditArticles() throws IOException, JSONException {
 
         // Open connection
-        URLConnection connection = (new URL("https://www.reddit.com/r/worldnews/.json?limit=100")).openConnection();
+        URLConnection connection = (new URL("https://www.reddit.com/r/worldnews/top/.json?sort=top&t=all&limit=100")).openConnection();
         connection.setRequestProperty("User-Agent",
                 String.format("android:xyz.muggr.newsly:v%1$s (by /u/regimme)", BuildConfig.VERSION_NAME));
         connection.setConnectTimeout(10000);
