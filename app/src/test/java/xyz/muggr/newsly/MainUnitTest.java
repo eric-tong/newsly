@@ -11,7 +11,7 @@ public class MainUnitTest {
     public void getArticles() {
         try {
             for (Article article : ApiManager.getArticles()) {
-                System.out.print(article.getCreated() + "\n");
+                System.out.print(article.getuId() + "\n");
             }
         } catch (Exception e) {
             e.printStackTrace();

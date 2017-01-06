@@ -5,12 +5,13 @@ import org.json.JSONObject;
 
 public class Article {
 
-    String title;
-    long created;
-    String domain;
-    String url;
-    boolean isNsfw;
-    String flair;
+    private String uId;
+    private String headline;
+    private String heroImageUrl;
+    private String domain;
+    private String flag;
+    private String tag;
+
 
     //region Constructors
     //=======================================================================================
@@ -19,13 +20,7 @@ public class Article {
     }
 
     public Article(JSONObject articleData) throws JSONException {
-        setTitle(articleData.getString("title"));
-        setCreated(articleData.getLong("created_utc"));
-        setDomain(articleData.getString("domain"));
-        setNsfw(articleData.getBoolean("over_18"));
-        setUrl(articleData.getString("url"));
-        if (!articleData.isNull("link_flair_text"))
-            setFlair(articleData.getString("link_flair_text"));
+        setHeadline(articleData.getString("headline"));
     }
 
 
@@ -35,20 +30,28 @@ public class Article {
     //region Getters/Setters
     //=======================================================================================
 
-    public String getTitle() {
-        return title;
+    public String getuId() {
+        return uId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
-    public long getCreated() {
-        return created;
+    public String getHeadline() {
+        return headline;
     }
 
-    public void setCreated(long created) {
-        this.created = created;
+    public void setHeadline(String headline) {
+        this.headline = headline;
+    }
+
+    public String getHeroImageUrl() {
+        return heroImageUrl;
+    }
+
+    public void setHeroImageUrl(String heroImageUrl) {
+        this.heroImageUrl = heroImageUrl;
     }
 
     public String getDomain() {
@@ -59,28 +62,20 @@ public class Article {
         this.domain = domain;
     }
 
-    public String getUrl() {
-        return url;
+    public String getFlag() {
+        return flag;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 
-    public boolean isNsfw() {
-        return isNsfw;
+    public String getTag() {
+        return tag;
     }
 
-    public void setNsfw(boolean nsfw) {
-        isNsfw = nsfw;
-    }
-
-    public String getFlair() {
-        return flair;
-    }
-
-    public void setFlair(String flair) {
-        this.flair = flair;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
 

@@ -65,7 +65,7 @@ public class ArticleCard extends RelativeLayout {
         final float CARD_RADIUS = activity.getResources().getDimension(R.dimen.radius_card_product);
 
         // SETUP PRODUCT CARD
-        inflate(activity, R.layout.vie_card_product, this);
+        inflate(activity, R.layout.vie_card_article, this);
         setPadding(PADDING_HORIZONTAL, PADDING_TOP, PADDING_HORIZONTAL, PADDING_BOTTOM);
         setLayerType(LAYER_TYPE_SOFTWARE, null);
 
@@ -106,7 +106,7 @@ public class ArticleCard extends RelativeLayout {
     public void setArticle(Article article) {
         this.currentArticle = article;
 
-        titleTv.setText(article.getTitle());
+        titleTv.setText(article.getHeadline());
     }
 
     //=======================================================================================

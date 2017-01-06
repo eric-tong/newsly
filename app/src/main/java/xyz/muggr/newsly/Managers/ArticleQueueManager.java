@@ -57,7 +57,7 @@ public class ArticleQueueManager {
                         for (int i = 0; i < articleQueue.size(); i++) {
                             Log.d(
                                     String.format("Queue %02d", i),
-                                    articleQueue.get(i).getTitle()
+                                    articleQueue.get(i).getHeadline()
                             );
                         }
                 }
