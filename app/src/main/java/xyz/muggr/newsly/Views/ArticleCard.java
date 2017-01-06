@@ -141,7 +141,7 @@ public class ArticleCard extends FrameLayout {
         }
 
         // Set time
-        timeTv.setText(MathUtil.getTimeDifference(article.getTimePosted() * 1000));
+        timeTv.setText(MathUtil.getHumanTime(article.getTimePosted() * 1000));
 
         // Set flags
         if (article.getFlags() > 0) {
