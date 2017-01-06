@@ -5,5 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="product_card_background">@android:color/white</color>
-    <color name="statusbar">#11303030</color>
+    <color name="statusbar">#77fafafa</color>
 </resources>
