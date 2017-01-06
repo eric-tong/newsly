@@ -12,6 +12,7 @@ import android.view.ViewPropertyAnimator;
 import android.view.animation.OvershootInterpolator;
 
 import xyz.muggr.newsly.NewslyActivity;
+import xyz.muggr.newsly.Utils.MathUtil;
 import xyz.muggr.newsly.Views.ArticleCard;
 
 
@@ -52,7 +53,7 @@ public class CardSwipeManager implements View.OnTouchListener {
             @Override
             public void run() {
                 FINAL_FLING_TRANSLATION = (int) ((swipableCard.getLeft() + swipableCard.getRight())
-                        + NewslyActivity.pythagoras(swipableCard.getWidth(), swipableCard.getHeight())) / 2;
+                        + MathUtil.pythagoras(swipableCard.getWidth(), swipableCard.getHeight())) / 2;
             }
         });
 
@@ -180,7 +181,7 @@ public class CardSwipeManager implements View.OnTouchListener {
 
                 // CHECK FOR TOUCH STATE, MINIMUM FLING VELOCITY
                 // AND FLING VELOCITY MATCHES TRANSLATION X DIRECTION
-                if (touchState != State.NONE && NewslyActivity.pythagoras(velocityX, velocityY) > MINIMUM_FLING_VELOCITY
+                if (touchState != State.NONE && MathUtil.pythagoras(velocityX, velocityY) > MINIMUM_FLING_VELOCITY
                         && swipableCard.getTranslationX() / velocityX >= 0) {
 
                     // SET NEW FLING STATE

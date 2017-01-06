@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.NewslyActivity;
 import xyz.muggr.newsly.R;
+import xyz.muggr.newsly.Utils.MathUtil;
 
 public class ArticleCard extends FrameLayout {
 
@@ -29,6 +30,7 @@ public class ArticleCard extends FrameLayout {
     private TextView tagTv;
     private TextView domainTv;
     private TextView flagTv;
+    private TextView timeTv;
 
     private Article currentArticle;
 
@@ -84,6 +86,7 @@ public class ArticleCard extends FrameLayout {
         tagTv = (TextView) findViewById(R.id.vie_card_article_tag_tv);
         domainTv = (TextView) findViewById(R.id.vie_card_article_domain_tv);
         flagTv = (TextView) findViewById(R.id.vie_card_article_flag_tv);
+        timeTv = (TextView) findViewById(R.id.vie_card_article_time_tv);
 
         // Set filter
         heroIv.setColorFilter(0x33000000);
@@ -136,6 +139,9 @@ public class ArticleCard extends FrameLayout {
         } else {
             tagTv.setVisibility(View.GONE);
         }
+
+        // Set time
+        timeTv.setText(MathUtil.getTimeDifference(article.getTimePosted() * 1000));
 
         // Set flags
         if (article.getFlags() > 0) {

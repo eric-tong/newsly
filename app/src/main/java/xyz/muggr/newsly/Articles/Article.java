@@ -11,6 +11,7 @@ public class Article {
     private String domain;
     private String tag;
     private int flags;
+    private long timePosted;
 
 
     //region Constructors
@@ -29,6 +30,7 @@ public class Article {
                         (articleData.getBoolean("over_18") ? Flag.IS_NSFW : 0)
         );
         setHeroImageUrl("https://static.independent.co.uk/s3fs-public/styles/story_large/public/thumbnails/image/2016/03/24/20/16-chuka-umunna-get.jpg");
+        setTimePosted(articleData.getLong("created_utc"));
     }
 
 
@@ -86,6 +88,13 @@ public class Article {
         this.tag = tag;
     }
 
+    public long getTimePosted() {
+        return timePosted;
+    }
+
+    public void setTimePosted(long timePosted) {
+        this.timePosted = timePosted;
+    }
 
     //=======================================================================================
     //endregion
