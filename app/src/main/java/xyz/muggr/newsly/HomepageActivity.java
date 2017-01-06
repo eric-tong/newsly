@@ -25,6 +25,9 @@ public class HomepageActivity extends NewslyActivity implements CardSwipeManager
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_homepage);
 
+        // Set theme
+        setLightStatusBar();
+
         // Get views
         swipableCard = (ArticleCard) findViewById(R.id.act_homepage_swipable_card);
         transitionCard = (ArticleCard) findViewById(R.id.act_homepage_transition_card);

@@ -8,15 +8,15 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.NewslyActivity;
 import xyz.muggr.newsly.R;
 
-public class ArticleCard extends RelativeLayout {
+public class ArticleCard extends FrameLayout {
 
     private int[] SCREEN_SIZE;
     private int DP_1;
@@ -31,17 +31,20 @@ public class ArticleCard extends RelativeLayout {
 
     public ArticleCard(Context context) {
         super(context);
-        init();
+        if (!isInEditMode())
+            init();
     }
 
     public ArticleCard(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        if (!isInEditMode())
+            init();
     }
 
     public ArticleCard(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        if (!isInEditMode())
+            init();
     }
 
     //=======================================================================================
