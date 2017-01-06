@@ -13,6 +13,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.NewslyActivity;
 import xyz.muggr.newsly.R;
@@ -59,31 +61,34 @@ public class ArticleCard extends FrameLayout {
 
     private void init() {
 
-        // GET RESOURCES
+        // Get resources
         final NewslyActivity activity = (NewslyActivity) getContext();
         SCREEN_SIZE = activity.SCREEN_SIZE;
         DP_1 = activity.DP_1;
 
-        // SET PARAMS
+        // Set params
         final int SHADOW_RADIUS = 10 * DP_1;
         final int PADDING_HORIZONTAL = 16 * DP_1;
         final int PADDING_BOTTOM = 16 * DP_1;
         final int PADDING_TOP = SHADOW_RADIUS - (PADDING_BOTTOM - SHADOW_RADIUS);
         final float CARD_RADIUS = activity.getResources().getDimension(R.dimen.radius_card_product);
 
-        // SETUP PRODUCT CARD
+        // Setup product card
         inflate(activity, R.layout.vie_card_article, this);
         setPadding(PADDING_HORIZONTAL, PADDING_TOP, PADDING_HORIZONTAL, PADDING_BOTTOM);
         setLayerType(LAYER_TYPE_SOFTWARE, null);
 
-        // GET VIEWS
+        // Get views
         heroIv = (ImageView) findViewById(R.id.vie_card_article_hero_iv);
         headlineTv = (TextView) findViewById(R.id.vie_card_article_title_tv);
         tagTv = (TextView) findViewById(R.id.vie_card_article_tag_tv);
         domainTv = (TextView) findViewById(R.id.vie_card_article_domain_tv);
         flagTv = (TextView) findViewById(R.id.vie_card_article_flag_tv);
 
-        // SETUP BACKGROUND
+        // Set filter
+        heroIv.setColorFilter(0x33000000);
+
+        // Setup background
         setBackground(new ShapeDrawable(new Shape() {
             @Override
             public void draw(Canvas canvas, Paint paint) {
@@ -120,6 +125,9 @@ public class ArticleCard extends FrameLayout {
         // Set content
         headlineTv.setText(article.getHeadline());
         domainTv.setText(article.getDomain());
+
+        // Set image
+        Picasso.with(getContext()).load(article.getHeroImageUrl()).into(heroIv);
 
         // Set tag
         if (article.getTag() != null) {

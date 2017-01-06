@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
-        android:src="@color/colorPrimary"
+        android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -40,10 +40,10 @@
         android:gravity="center"
         android:letterSpacing="0.7"
         android:padding="16dp"
-        android:visibility="gone"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="@+id/vie_card_article_hero_iv"
         app:layout_constraintRight_toRightOf="@+id/vie_card_article_hero_iv"
         app:layout_constraintTop_toTopOf="@+id/vie_card_article_hero_iv" />
@@ -63,9 +63,9 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/vie_card_article_hero_iv"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/vie_card_article_hero_iv"
-        app:layout_constraintRight_toRightOf="@+id/vie_card_article_hero_iv"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintRight_toRightOf="@+id/vie_card_article_hero_iv" />
 
     <TextView
         android:id="@+id/vie_card_article_domain_tv"

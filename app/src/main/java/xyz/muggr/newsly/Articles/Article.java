@@ -28,6 +28,7 @@ public class Article {
                 (articleData.getLong("score") > 2000L ? Flag.IS_TOP_NEWS : 0) |
                         (articleData.getBoolean("over_18") ? Flag.IS_NSFW : 0)
         );
+        setHeroImageUrl("https://static.independent.co.uk/s3fs-public/styles/story_large/public/thumbnails/image/2016/03/24/20/16-chuka-umunna-get.jpg");
     }
 
 
