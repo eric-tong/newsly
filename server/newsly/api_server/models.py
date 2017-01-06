@@ -1,9 +1,13 @@
 from django.db import models
+from django.utils.text import Truncator
 import uuid
 
 class Client(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=256)
+
+    def __str__(self):
+        return "'{0}' <{1}>".format(self.name, self.uuid)
 
 class Stream(models.Model):
     # TODO: Consider cascade model for stream deletion
@@ -15,6 +19,12 @@ class Card(models.Model):
     src = models.URLField()
     img = models.URLField()
     streams = models.ManyToManyField(Stream)
+
+    def __str__(self):
+        return "{0} ({1}), <{2}>".format(
+                Truncator(self.title).chars(40),
+                Truncator(self.src).chars(40),
+                self.uuid)
 
 class Decision(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
