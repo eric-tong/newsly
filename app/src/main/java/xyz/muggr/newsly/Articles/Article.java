@@ -20,7 +20,7 @@ public class Article {
     }
 
     public Article(JSONObject articleData) throws JSONException {
-        setHeadline(articleData.getString("headline"));
+        setHeadline(articleData.getString("title"));
     }
 
 
