@@ -9,8 +9,8 @@ public class Article {
     private String headline;
     private String heroImageUrl;
     private String domain;
-    private String flag;
     private String tag;
+    private int flags;
 
 
     //region Constructors
@@ -23,7 +23,11 @@ public class Article {
         setHeadline(articleData.getString("title"));
         setDomain(articleData.getString("domain"));
         if (!articleData.isNull("link_flair_text"))
-            setFlag(articleData.getString("link_flair_text"));
+            setTag(articleData.getString("link_flair_text"));
+        setFlags(
+                (articleData.getLong("score") > 2000L ? Flag.IS_TOP_NEWS : 0) |
+                        (articleData.getBoolean("over_18") ? Flag.IS_NSFW : 0)
+        );
     }
 
 
@@ -65,12 +69,12 @@ public class Article {
         this.domain = domain;
     }
 
-    public String getFlag() {
-        return flag;
+    public int getFlags() {
+        return flags;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setFlags(int flags) {
+        this.flags = flags;
     }
 
     public String getTag() {
@@ -81,6 +85,17 @@ public class Article {
         this.tag = tag;
     }
 
+
+    //=======================================================================================
+    //endregion
+
+    //region Keys
+    //=======================================================================================
+
+    public static class Flag {
+        public static final int IS_TOP_NEWS = 0b01;
+        public static final int IS_NSFW = 0b10;
+    }
 
     //=======================================================================================
     //endregion

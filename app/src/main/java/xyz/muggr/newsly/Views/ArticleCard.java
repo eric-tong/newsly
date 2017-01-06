@@ -115,11 +115,18 @@ public class ArticleCard extends FrameLayout {
     public void setArticle(Article article) {
         this.currentArticle = article;
 
+        // Set content
         headlineTv.setText(article.getHeadline());
         domainTv.setText(article.getDomain());
-        if (article.getFlag() != null) {
+
+        // Set flags
+        if (article.getFlags() > 0) {
             flagTv.setVisibility(View.VISIBLE);
-            flagTv.setText(article.getFlag().toLowerCase());
+            if ((article.getFlags() & Article.Flag.IS_NSFW) == Article.Flag.IS_NSFW) {
+                flagTv.setText("nsfw");
+            } else if ((article.getFlags() & Article.Flag.IS_TOP_NEWS) == Article.Flag.IS_TOP_NEWS) {
+                flagTv.setText("top news");
+            }
         } else
             flagTv.setVisibility(View.GONE);
     }
