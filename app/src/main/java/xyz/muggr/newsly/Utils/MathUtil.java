@@ -40,7 +40,10 @@ public class MathUtil {
         long timeDifference = new Date().getTime() - pastTime;
         Calendar currentCalendar = Calendar.getInstance();
         Calendar pastCalendar = Calendar.getInstance();
-        pastCalendar.add(Calendar.MILLISECOND, (int) (timeDifference * -1));
+        if (timeDifference * -1 > Integer.MIN_VALUE)
+            pastCalendar.add(Calendar.MILLISECOND, (int) (timeDifference * -1));
+        else
+            pastCalendar.add(Calendar.SECOND, (int) (timeDifference * -1000));
 
         // Less than 1 hour
         if (timeDifference < TimeUnit.HOURS.toMillis(1))
