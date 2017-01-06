@@ -76,11 +76,20 @@ WSGI_APPLICATION = 'newsly.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'newsly_api',
+        'USER': 'newsly_api_user',
+        'PASSWORD': os.environ["_NEWSLY_POSTGRES_PASSWORD"],
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
+if os.environ["_NEWSLY_ENV"] == "production":
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
