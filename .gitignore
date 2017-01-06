@@ -7,3 +7,6 @@
 /build
 /captures
 .externalNativeBuild
+__pycache__/
+*.py[cod]
+>>>>>>> 2024159d68248279e37561e14fe1c0654adfd37f
