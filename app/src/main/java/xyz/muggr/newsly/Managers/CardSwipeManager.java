@@ -170,7 +170,7 @@ public class CardSwipeManager implements View.OnTouchListener {
 
                 // IF TRANSLATION IS ZERO, A CLICK WAS PERFORMED
                 if (touchState != State.NONE && swipableCard.getTranslationX() == 0 && swipableCard.getTranslationY() == 0) {
-                    // TODO ADD ONCLICK
+                    swipableCard.onClick();
                     break;
                 }
 

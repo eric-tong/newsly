@@ -158,4 +158,14 @@ public class ArticleCard extends FrameLayout {
     //=======================================================================================
     //endregion
 
+    //region Interaction methods
+    //=======================================================================================
+
+    public void onClick() {
+        ((NewslyActivity) getContext()).openPage(currentArticle.getUrl());
+    }
+
+    //=======================================================================================
+    //endregion
+
 }

@@ -1,7 +1,10 @@
 package xyz.muggr.newsly;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Toast;
 
 public class NewslyActivity extends AppCompatActivity {
 
@@ -59,6 +63,28 @@ public class NewslyActivity extends AppCompatActivity {
 
     boolean isDarkTheme(){
         return false;
+    }
+
+    //=======================================================================================
+    //endregion
+
+    //region Internet methods
+    //=======================================================================================
+
+    public void openGooglePlayPage() {
+        final String appPackageName = getPackageName();
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            Toast.makeText(this, "Leave a rating", Toast.LENGTH_LONG).show();
+        } catch (ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+    }
+
+    public void openPage(String url) {
+        // TODO CHECK INTERNET CONNECTION
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 
     //=======================================================================================
