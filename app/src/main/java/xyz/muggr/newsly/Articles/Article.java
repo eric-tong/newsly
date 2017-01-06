@@ -21,6 +21,9 @@ public class Article {
 
     public Article(JSONObject articleData) throws JSONException {
         setHeadline(articleData.getString("title"));
+        setDomain(articleData.getString("domain"));
+        if (!articleData.isNull("link_flair_text"))
+            setFlag(articleData.getString("link_flair_text"));
     }
 
 

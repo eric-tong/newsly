@@ -8,6 +8,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,8 +22,10 @@ public class ArticleCard extends FrameLayout {
     private int[] SCREEN_SIZE;
     private int DP_1;
 
-    private ImageView primaryIv;
-    private TextView titleTv;
+    private ImageView heroIv;
+    private TextView headlineTv;
+    private TextView domainTv;
+    private TextView flagTv;
 
     private Article currentArticle;
 
@@ -73,7 +76,10 @@ public class ArticleCard extends FrameLayout {
         setLayerType(LAYER_TYPE_SOFTWARE, null);
 
         // GET VIEWS
-        titleTv = (TextView) findViewById(R.id.vie_card_product_title_tv);
+        heroIv = (ImageView) findViewById(R.id.vie_card_article_hero_iv);
+        headlineTv = (TextView) findViewById(R.id.vie_card_article_title_tv);
+        domainTv = (TextView) findViewById(R.id.vie_card_article_domain_tv);
+        flagTv = (TextView) findViewById(R.id.vie_card_article_flag_tv);
 
         // SETUP BACKGROUND
         setBackground(new ShapeDrawable(new Shape() {
@@ -109,7 +115,13 @@ public class ArticleCard extends FrameLayout {
     public void setArticle(Article article) {
         this.currentArticle = article;
 
-        titleTv.setText(article.getHeadline());
+        headlineTv.setText(article.getHeadline());
+        domainTv.setText(article.getDomain());
+        if (article.getFlag() != null) {
+            flagTv.setVisibility(View.VISIBLE);
+            flagTv.setText(article.getFlag().toLowerCase());
+        } else
+            flagTv.setVisibility(View.GONE);
     }
 
     //=======================================================================================
