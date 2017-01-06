@@ -32,12 +32,12 @@ public class ArticleQueueManager {
 
     public void load(final ArticleQueueListener listener) {
 
-        if (articleQueue.size() < 10)
+        if (articleQueue.size() < 2)
             new AsyncTask<Void, Void, ArticleList>() {
                 @Override
                 protected ArticleList doInBackground(Void... params) {
                     try {
-                        return ApiManager.getArticles();
+                        return ApiManager.getRedditArticles();
                     } catch (Exception e) {
                         if (BuildConfig.DEBUG)
                             e.printStackTrace();

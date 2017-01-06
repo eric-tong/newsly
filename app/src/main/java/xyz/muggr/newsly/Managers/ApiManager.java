@@ -1,5 +1,7 @@
 package xyz.muggr.newsly.Managers;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +18,63 @@ import xyz.muggr.newsly.BuildConfig;
 
 public class ApiManager {
 
-    public static ArticleList getArticles() throws IOException, JSONException {
+    private static final String ROOT = "http://newsly-api.herokuapp.com/api/";
+
+    //region Getters
+    //=======================================================================================
+
+    private static String getFromUrl(String Url) throws IOException {
+
+        // Open connection
+        URLConnection connection = (new URL(Url)).openConnection();
+        connection.setRequestProperty("User-Agent",
+                String.format("android:xyz.muggr.newsly:v%1$s (by /u/regimme)", BuildConfig.VERSION_NAME));
+        connection.setConnectTimeout(10000);
+        connection.setReadTimeout(10000);
+        connection.connect();
+
+        // Read inputStream
+        BufferedReader streamReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+        StringBuilder jsonBuilder = new StringBuilder();
+        String inputString;
+        while ((inputString = streamReader.readLine()) != null)
+            jsonBuilder.append(inputString);
+        return jsonBuilder.toString();
+    }
+
+    public static String getUuid() throws IOException, JSONException {
+        JSONObject jsonObject = new JSONObject(getFromUrl(ROOT + "register"));
+        if (isValid(jsonObject))
+            return jsonObject.getString("uuid");
+        else
+            return null;
+    }
+
+    //=======================================================================================
+    //endregion
+
+    //region Check methods
+    //=======================================================================================
+
+    private static boolean isValid(JSONObject jsonObject) throws JSONException {
+        JSONObject status = jsonObject.getJSONObject("status");
+        if (status.getInt("code") == 200)
+            return true;
+        else {
+            // TODO Add Firebase error logger
+            if (BuildConfig.DEBUG)
+                Log.e("Json Error", status.toString());
+            return false;
+        }
+    }
+
+    //=======================================================================================
+    //endregion
+
+    //region Testing methods
+    //=======================================================================================
+
+    public static ArticleList getRedditArticles() throws IOException, JSONException {
 
         // Open connection
         URLConnection connection = (new URL("https://www.reddit.com/r/worldnews/.json?limit=100")).openConnection();
@@ -44,5 +102,8 @@ public class ApiManager {
 
         return articles;
     }
+
+    //=======================================================================================
+    //endregion
 
 }
