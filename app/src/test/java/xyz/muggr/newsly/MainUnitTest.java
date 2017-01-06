@@ -3,15 +3,16 @@ package xyz.muggr.newsly;
 import org.junit.Test;
 
 import xyz.muggr.newsly.Articles.Article;
-import xyz.muggr.newsly.Managers.RedditManager;
+import xyz.muggr.newsly.Managers.ApiManager;
 
 
 public class MainUnitTest {
     @Test
     public void getArticles() {
         try {
-            for (Article article : RedditManager.getArticles())
-                System.out.print(article.getFlair() + "\n");
+            for (Article article : ApiManager.getArticles()) {
+                System.out.print(article.getuId() + "\n");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

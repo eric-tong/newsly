@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xyz.muggr.newsly.HomepageActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="top|left"
+        android:layout_marginTop="@dimen/status_bar_height"
+        android:onClick="onButtonClick"
+        android:padding="12dp"
+        android:src="@drawable/abc_ic_menu_overflow_material"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <xyz.muggr.newsly.Views.ArticleCard
+        android:id="@+id/act_homepage_transition_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/act_homepage_swipable_card"
+        app:layout_constraintLeft_toLeftOf="@+id/act_homepage_swipable_card"
+        app:layout_constraintRight_toRightOf="@+id/act_homepage_swipable_card"
+        app:layout_constraintTop_toTopOf="@+id/act_homepage_swipable_card" />
+
+    <xyz.muggr.newsly.Views.ArticleCard
+        android:id="@+id/act_homepage_swipable_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/statusbar"/>
+
+</android.support.constraint.ConstraintLayout>

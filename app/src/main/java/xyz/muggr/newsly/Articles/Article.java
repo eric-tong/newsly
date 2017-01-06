@@ -5,12 +5,13 @@ import org.json.JSONObject;
 
 public class Article {
 
-    String title;
-    long created;
-    String domain;
-    String url;
-    boolean isNsfw;
-    String flair;
+    private String uId;
+    private String headline;
+    private String heroImageUrl;
+    private String domain;
+    private String flag;
+    private String tag;
+
 
     //region Constructors
     //=======================================================================================
@@ -18,14 +19,8 @@ public class Article {
     public Article() {
     }
 
-    public Article(JSONObject articleJson) throws JSONException {
-        setTitle(articleJson.getString("title"));
-        setCreated(articleJson.getLong("created_utc"));
-        setDomain(articleJson.getString("domain"));
-        setNsfw(articleJson.getBoolean("over_18"));
-        setUrl(articleJson.getString("url"));
-        if (!articleJson.isNull("link_flair_text"))
-            setFlair(articleJson.getString("link_flair_text"));
+    public Article(JSONObject articleData) throws JSONException {
+        setHeadline(articleData.getString("title"));
     }
 
 
@@ -35,20 +30,28 @@ public class Article {
     //region Getters/Setters
     //=======================================================================================
 
-    public String getTitle() {
-        return title;
+    public String getuId() {
+        return uId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
-    public long getCreated() {
-        return created;
+    public String getHeadline() {
+        return headline;
     }
 
-    public void setCreated(long created) {
-        this.created = created;
+    public void setHeadline(String headline) {
+        this.headline = headline;
+    }
+
+    public String getHeroImageUrl() {
+        return heroImageUrl;
+    }
+
+    public void setHeroImageUrl(String heroImageUrl) {
+        this.heroImageUrl = heroImageUrl;
     }
 
     public String getDomain() {
@@ -59,28 +62,20 @@ public class Article {
         this.domain = domain;
     }
 
-    public String getUrl() {
-        return url;
+    public String getFlag() {
+        return flag;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 
-    public boolean isNsfw() {
-        return isNsfw;
+    public String getTag() {
+        return tag;
     }
 
-    public void setNsfw(boolean nsfw) {
-        isNsfw = nsfw;
-    }
-
-    public String getFlair() {
-        return flair;
-    }
-
-    public void setFlair(String flair) {
-        this.flair = flair;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
 
