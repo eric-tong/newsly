@@ -87,16 +87,22 @@
         android:id="@+id/vie_card_article_flag_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:background="@drawable/bkg_border_rectangle_attention"
         android:fontFamily="sans-serif-smallcaps"
         android:maxLines="1"
+        android:paddingBottom="4dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:rotation="10"
+        android:textColor="@color/md_amber_500"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/vie_card_article_guideline"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vie_card_article_hero_iv" />
+        app:layout_constraintTop_toBottomOf="@+id/vie_card_article_hero_iv"
+        app:layout_constraintHorizontal_bias="0.75" />
 
 </android.support.constraint.ConstraintLayout>
