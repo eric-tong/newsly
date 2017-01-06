@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class MathUtil {
@@ -38,11 +37,10 @@ public class MathUtil {
 
     public static String getHumanTime(long pastTime) {
 
+        long timeDifference = new Date().getTime() - pastTime;
         Calendar currentCalendar = Calendar.getInstance();
         Calendar pastCalendar = Calendar.getInstance();
-        pastCalendar.setTimeInMillis(pastTime + TimeZone.getDefault().getRawOffset());
-
-        long timeDifference = new Date().getTime() - pastTime;
+        pastCalendar.add(Calendar.MILLISECOND, (int) (timeDifference * -1));
 
         // Less than 1 hour
         if (timeDifference < TimeUnit.HOURS.toMillis(1))
@@ -61,7 +59,7 @@ public class MathUtil {
             int hour = pastCalendar.get(Calendar.HOUR_OF_DAY);
             if (hour < 12)
                 return "this morning";
-            if (hour < 6)
+            else if (hour < 18)
                 return "this afternoon";
             else
                 return "this evening";
