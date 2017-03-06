@@ -1,6 +1,7 @@
 package xyz.muggr.newsly.Views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import xyz.muggr.newsly.ArticleActivity;
 import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.NewslyActivity;
 import xyz.muggr.newsly.R;
@@ -162,7 +164,14 @@ public class ArticleCard extends FrameLayout {
     //=======================================================================================
 
     public void onClick() {
-        ((NewslyActivity) getContext()).openPage(currentArticle.getUrl());
+        // Create new activity intent
+        Intent activityIntent = new Intent(getContext(), ArticleActivity.class);
+
+        // Pass article into intent
+        activityIntent.putExtra("currentArticle", currentArticle);
+
+        // Start activity
+        getContext().startActivity(activityIntent);
     }
 
     //=======================================================================================

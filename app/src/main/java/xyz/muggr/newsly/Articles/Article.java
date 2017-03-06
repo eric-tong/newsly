@@ -1,9 +1,12 @@
 package xyz.muggr.newsly.Articles;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Article {
+public class Article implements Parcelable {
 
     private String uId;
     private String headline;
@@ -123,6 +126,52 @@ public class Article {
 
         setHeroImageUrl(heroImageUrls[(int) (Math.random() * heroImageUrls.length)]);
     }
+
+    //=======================================================================================
+    //endregion
+
+    //region Parcelable methods
+    //=======================================================================================
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.uId);
+        dest.writeString(this.headline);
+        dest.writeString(this.heroImageUrl);
+        dest.writeString(this.domain);
+        dest.writeString(this.tag);
+        dest.writeInt(this.flags);
+        dest.writeLong(this.timePosted);
+        dest.writeString(this.url);
+    }
+
+    protected Article(Parcel in) {
+        this.uId = in.readString();
+        this.headline = in.readString();
+        this.heroImageUrl = in.readString();
+        this.domain = in.readString();
+        this.tag = in.readString();
+        this.flags = in.readInt();
+        this.timePosted = in.readLong();
+        this.url = in.readString();
+    }
+
+    public static final Parcelable.Creator<Article> CREATOR = new Parcelable.Creator<Article>() {
+        @Override
+        public Article createFromParcel(Parcel source) {
+            return new Article(source);
+        }
+
+        @Override
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
 
     //=======================================================================================
     //endregion
