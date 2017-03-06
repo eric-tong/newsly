@@ -1,14 +1,13 @@
 package xyz.muggr.newsly;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
 import xyz.muggr.newsly.Articles.Article;
 
-public class ArticleActivity extends AppCompatActivity {
+public class ArticleActivity extends NewslyActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +16,9 @@ public class ArticleActivity extends AppCompatActivity {
 
         // Get resources
         Article currentArticle = getIntent().getParcelableExtra("currentArticle");
+
+        // Set screen
+        setLightStatusBar();
 
         // Get views
         ImageView heroIv = (ImageView) findViewById(R.id.act_article_hero_iv);
