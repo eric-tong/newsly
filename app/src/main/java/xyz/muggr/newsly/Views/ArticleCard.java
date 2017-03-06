@@ -1,5 +1,6 @@
 package xyz.muggr.newsly.Views;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -7,8 +8,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Pair;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,6 +24,7 @@ import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.NewslyActivity;
 import xyz.muggr.newsly.R;
 import xyz.muggr.newsly.Utils.MathUtil;
+import xyz.muggr.newsly.Utils.TransitionUtil;
 
 public class ArticleCard extends FrameLayout {
 
@@ -164,14 +168,24 @@ public class ArticleCard extends FrameLayout {
     //=======================================================================================
 
     public void onClick() {
+        // Get resources
+        NewslyActivity activity = (NewslyActivity) getContext();
+
         // Create new activity intent
-        Intent activityIntent = new Intent(getContext(), ArticleActivity.class);
+        Intent activityIntent = new Intent(activity, ArticleActivity.class);
 
         // Pass article into intent
         activityIntent.putExtra("currentArticle", currentArticle);
 
+        // Setup transition bundle
+        Bundle transitionBundle =
+                ActivityOptions.makeSceneTransitionAnimation(activity,
+                        new Pair<View, String>(heroIv, TransitionUtil.heroIvTransition),
+                        new Pair<>(activity.getNavbar(), TransitionUtil.navbarTransition)
+                ).toBundle();
+
         // Start activity
-        getContext().startActivity(activityIntent);
+        activity.startActivity(activityIntent, transitionBundle);
     }
 
     //=======================================================================================
