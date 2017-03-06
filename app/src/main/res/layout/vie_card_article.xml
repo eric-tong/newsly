@@ -48,24 +48,28 @@
         app:layout_constraintRight_toRightOf="@+id/vie_card_article_hero_iv"
         app:layout_constraintTop_toTopOf="@+id/vie_card_article_hero_iv" />
 
+    <ImageView
+        android:id="@+id/vie_card_article_headline_bkg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/bkg_screen_bottom"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/vie_card_article_headline_tv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/vie_card_article_headline_tv"
+        app:layout_constraintRight_toRightOf="@+id/vie_card_article_headline_tv"
+        app:layout_constraintTop_toTopOf="@+id/vie_card_article_headline_tv" />
+
     <TextView
-        android:id="@+id/vie_card_article_title_tv"
+        android:id="@+id/vie_card_article_headline_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bkg_screen_bottom"
-        android:ellipsize="end"
-        android:fontFamily="serif"
-        android:gravity="center_vertical|start"
-        android:lineSpacingMultiplier="1.2"
-        android:maxLines="4"
-        android:padding="16dp"
-        android:paddingEnd="40dp"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/vie_card_article_hero_iv"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/vie_card_article_hero_iv"
-        app:layout_constraintRight_toRightOf="@+id/vie_card_article_hero_iv" />
+        app:layout_constraintRight_toRightOf="@+id/vie_card_article_hero_iv"
+        style="@style/text_headline" />
 
     <TextView
         android:id="@+id/vie_card_article_domain_tv"

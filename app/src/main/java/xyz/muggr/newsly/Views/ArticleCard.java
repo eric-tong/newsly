@@ -32,6 +32,7 @@ public class ArticleCard extends FrameLayout {
     private int DP_1;
 
     private ImageView heroIv;
+    private ImageView headlineBkg;
     private TextView headlineTv;
     private TextView tagTv;
     private TextView domainTv;
@@ -88,7 +89,8 @@ public class ArticleCard extends FrameLayout {
 
         // Get views
         heroIv = (ImageView) findViewById(R.id.vie_card_article_hero_iv);
-        headlineTv = (TextView) findViewById(R.id.vie_card_article_title_tv);
+        headlineBkg = (ImageView) findViewById(R.id.vie_card_article_headline_bkg);
+        headlineTv = (TextView) findViewById(R.id.vie_card_article_headline_tv);
         tagTv = (TextView) findViewById(R.id.vie_card_article_tag_tv);
         domainTv = (TextView) findViewById(R.id.vie_card_article_domain_tv);
         flagTv = (TextView) findViewById(R.id.vie_card_article_flag_tv);
@@ -174,13 +176,16 @@ public class ArticleCard extends FrameLayout {
         // Create new activity intent
         Intent activityIntent = new Intent(activity, ArticleActivity.class);
 
-        // Pass article into intent
+        // Pass extras into intent
         activityIntent.putExtra("currentArticle", currentArticle);
+        activityIntent.putExtra("headlineTvWidth", headlineTv.getWidth());
 
         // Setup transition bundle
         Bundle transitionBundle =
                 ActivityOptions.makeSceneTransitionAnimation(activity,
                         new Pair<View, String>(heroIv, TransitionUtil.heroIvTransition),
+                        new Pair<View, String>(headlineBkg, TransitionUtil.headlineBkgTransition),
+                        new Pair<View, String>(headlineTv, TransitionUtil.headlineTvTransition),
                         new Pair<>(activity.getNavbar(), TransitionUtil.navbarTransition)
                 ).toBundle();
 

@@ -7,6 +7,8 @@ public class TransitionUtil {
 
     public static final String navbarTransition = "navbarTransition";
     public static final String heroIvTransition = "heroIvTransition";
+    public static final String headlineTvTransition = "headlineTvTransition";
+    public static final String headlineBkgTransition = "headlineBkgTransition";
 
     //=======================================================================================
     //endregion

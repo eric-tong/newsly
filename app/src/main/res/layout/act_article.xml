@@ -19,13 +19,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/act_article_headline_bkg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/bkg_screen_bottom"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/act_article_headline_tv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/act_article_headline_tv" />
+
+    <TextView
+        android:id="@+id/act_article_headline_tv"
+        style="@style/text_headline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/act_article_hero_iv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/act_article_hero_iv" />
+
     <View
         android:id="@+id/nav_bg"
         android:layout_width="0dp"
         android:layout_height="24dp"
+        android:background="@color/statusbar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/statusbar"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
