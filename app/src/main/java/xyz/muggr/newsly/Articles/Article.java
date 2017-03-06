@@ -30,9 +30,9 @@ public class Article {
                 (articleData.getLong("score") > 2000L ? Flag.IS_TOP_NEWS : 0) |
                         (articleData.getBoolean("over_18") ? Flag.IS_NSFW : 0)
         );
-        setHeroImageUrl("https://static.independent.co.uk/s3fs-public/styles/story_large/public/thumbnails/image/2016/03/24/20/16-chuka-umunna-get.jpg");
         setTimePosted(articleData.getLong("created_utc"));
         setUrl(articleData.getString("url"));
+        setTestImage();
     }
 
 
@@ -104,6 +104,24 @@ public class Article {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    //=======================================================================================
+    //endregion
+
+    //region Testing methods
+    //=======================================================================================
+
+    private void setTestImage() {
+        String[] heroImageUrls = new String[]{
+                "https://static.independent.co.uk/s3fs-public/styles/story_large/public/thumbnails/image/2016/03/24/20/16-chuka-umunna-get.jpg",
+                "http://ichef.bbci.co.uk/news/660/cpsprodpb/108DE/production/_94960876_c6p7ywcxeaas38r.jpg",
+                "http://ichef-1.bbci.co.uk/news/660/cpsprodpb/13286/production/_94907487_annricmalaysiashortlistopennature2017sonyworldphotographyawards.jpg",
+                "http://ichef.bbci.co.uk/news/660/cpsprodpb/17DAF/production/_94911779_yuliagrigoryantsarmeniashortlistprofessionaldailylife2017sonyworldphotographyawards.jpg",
+                "http://ichef.bbci.co.uk/news/660/cpsprodpb/7A26/production/_94907213_andrsgallardoalbajarspainshortlistopenstilllife2017sonyworldphotographyawards.jpg"
+        };
+
+        setHeroImageUrl(heroImageUrls[(int) (Math.random() * heroImageUrls.length)]);
     }
 
     //=======================================================================================
