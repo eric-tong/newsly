@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from newspaper import Article
 
-# Create your views here.
+
+def index(request):
+    url = request.GET.get('url', ' ')
+    article = Article(url)
+    article.download()
+    return HttpResponse(article.html)
