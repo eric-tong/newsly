@@ -1,5 +1,7 @@
 package xyz.muggr.newsly;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -100,6 +102,14 @@ public class NewslyActivity extends AppCompatActivity {
 
     public View getNavbar() {
         return findViewById(R.id.nav_bg);
+    }
+
+    public static Animator fadeView(View view, float from, float to, long delay, long duration) {
+        ObjectAnimator fadeAnim = ObjectAnimator.ofFloat(view, "alpha", from, to);
+        fadeAnim.setDuration(duration);
+        fadeAnim.setStartDelay(delay);
+        fadeAnim.start();
+        return fadeAnim;
     }
 
     //=======================================================================================

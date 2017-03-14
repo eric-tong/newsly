@@ -40,7 +40,7 @@ public class HomepageActivity extends NewslyActivity implements CardSwipeManager
         // Load cards
         articleQueueManager.load(this);
     }
-    
+
     //region User interaction methods
     //=======================================================================================
 

@@ -166,6 +166,17 @@ public class ArticleCard extends FrameLayout {
     //=======================================================================================
     //endregion
 
+    //region Getters
+    //=======================================================================================
+
+    public TextView getHeadlineTv() {
+        return headlineTv;
+    }
+
+
+    //=======================================================================================
+    //endregion
+
     //region Interaction methods
     //=======================================================================================
 
@@ -179,6 +190,7 @@ public class ArticleCard extends FrameLayout {
         // Pass extras into intent
         activityIntent.putExtra("currentArticle", currentArticle);
         activityIntent.putExtra("headlineTvWidth", headlineTv.getWidth());
+        activityIntent.putExtra("headlineTvHeight", headlineTv.getHeight());
 
         // Setup transition bundle
         Bundle transitionBundle =
@@ -190,7 +202,7 @@ public class ArticleCard extends FrameLayout {
                 ).toBundle();
 
         // Start activity
-        activity.startActivity(activityIntent, transitionBundle);
+        activity.startActivityForResult(activityIntent, ArticleActivity.requestCode, transitionBundle);
     }
 
     //=======================================================================================

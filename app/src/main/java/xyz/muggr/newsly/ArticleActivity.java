@@ -15,13 +15,18 @@ import xyz.muggr.newsly.Utils.TransitionUtil;
 
 public class ArticleActivity extends NewslyActivity {
 
+    public static final int requestCode = 100;
+
+    private TextView headlineTv;
+    private Article currentArticle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_article);
 
         // Get resources
-        Article currentArticle = getIntent().getParcelableExtra("currentArticle");
+        currentArticle = getIntent().getParcelableExtra("currentArticle");
 
         // Set screen
         setLightStatusBar();
@@ -29,7 +34,7 @@ public class ArticleActivity extends NewslyActivity {
         // Get views
         ImageView heroIv = (ImageView) findViewById(R.id.act_article_hero_iv);
         ImageView headlineBkg = (ImageView) findViewById(R.id.act_article_headline_bkg);
-        TextView headlineTv = (TextView) findViewById(R.id.act_article_headline_tv);
+        headlineTv = (TextView) findViewById(R.id.act_article_headline_tv);
 
         // Set hero image
         heroIv.setColorFilter(0x33000000);
@@ -38,6 +43,7 @@ public class ArticleActivity extends NewslyActivity {
         // Set headline
         headlineTv.setText(currentArticle.getHeadline());
         headlineTv.getLayoutParams().width = getIntent().getIntExtra("headlineTvWidth", ConstraintLayout.LayoutParams.MATCH_PARENT);
+        headlineBkg.getLayoutParams().height = getIntent().getIntExtra("headlineTvHeight", 0);
 
         // Setup transitions
         Transition fade = new Fade();
@@ -51,5 +57,33 @@ public class ArticleActivity extends NewslyActivity {
         ViewCompat.setTransitionName(headlineBkg, TransitionUtil.headlineBkgTransition);
         ViewCompat.setTransitionName(headlineTv, TransitionUtil.headlineTvTransition);
         ViewCompat.setTransitionName(getNavbar(), TransitionUtil.navbarTransition);
+
+//        // Set animation
+//        headlineTv.animate().alpha(0).setDuration(300).setListener(
+//                new AnimatorListenerAdapter() {
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        super.onAnimationEnd(animation);
+//                        headlineTv.setText("Article Title");
+//                        headlineTv.animate().alpha(1).setDuration(300);
+//                    }
+//                }
+//        );
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Set animation
+//        headlineTv.animate().alpha(0).setDuration(200).setListener(
+//                new AnimatorListenerAdapter() {
+//                    @Override
+//                    public void onAnimationEnd(Animator animation) {
+//                        super.onAnimationEnd(animation);
+//                        headlineTv.setAlpha(0);
+//                    }
+//                }
+//        );
+
+        super.onBackPressed();
     }
 }
