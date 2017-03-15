@@ -25,7 +25,7 @@ SECRET_KEY = 'vqe=e)f5)0ok9nq=!j-+wwx018ywf!t@tn73=06(frc)h2+2t-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'newsly.muggr.xyz', '127.0.0.1']
 
 
 # Application definition
