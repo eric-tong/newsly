@@ -13,3 +13,6 @@ class RedditArticle(models.Model):
     articleKeywords = models.CharField(max_length=255, null=True)
     articlePublishDate = models.CharField(max_length=255, null=True)
     timeRetrieved = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.redditTitle

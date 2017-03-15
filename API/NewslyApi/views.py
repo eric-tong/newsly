@@ -33,6 +33,8 @@ def index(request):
         # Get newspaper data
         article = Article(reddit_article.articleUrl, keep_article_html=True)
         article.download()
+        if not article.is_downloaded:
+            continue
         article.parse()
         article.nlp()
         reddit_article.articleTitle = article.title
@@ -47,4 +49,4 @@ def index(request):
     def json_default(self):
         return self.__dict__
 
-    return HttpResponse(json.dumps(RedditArticle.objects.all(), default=json_default))
+    return HttpResponse(json.dumps(list(RedditArticle.objects.all()), default=json_default))
