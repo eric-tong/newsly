@@ -2,5 +2,5 @@ package xyz.muggr.newsly.Articles;
 
 import java.util.ArrayList;
 
-public class ArticleList extends ArrayList<Article> {
+public class ArticleList extends ArrayList<RedditArticle> {
 }

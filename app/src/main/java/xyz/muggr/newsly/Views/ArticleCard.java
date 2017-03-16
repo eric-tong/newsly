@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import xyz.muggr.newsly.ArticleActivity;
-import xyz.muggr.newsly.Articles.Article;
+import xyz.muggr.newsly.Articles.RedditArticle;
 import xyz.muggr.newsly.NewslyActivity;
 import xyz.muggr.newsly.R;
 import xyz.muggr.newsly.Utils.MathUtil;
@@ -39,7 +39,7 @@ public class ArticleCard extends FrameLayout {
     private TextView flagTv;
     private TextView timeTv;
 
-    private Article currentArticle;
+    private RedditArticle currentArticle;
 
     //region Constructor
     //=======================================================================================
@@ -130,37 +130,37 @@ public class ArticleCard extends FrameLayout {
     //region Setters
     //=======================================================================================
 
-    public void setArticle(Article article) {
+    public void setArticle(RedditArticle article) {
         this.currentArticle = article;
 
         // Set content
-        headlineTv.setText(article.getHeadline());
-        domainTv.setText(article.getDomain());
+        headlineTv.setText(article.getRedditTitle());
+        domainTv.setText(article.getArticleDomain());
 
         // Set image
-        Picasso.with(getContext()).load(article.getHeroImageUrl()).into(heroIv);
+        Picasso.with(getContext()).load(article.getArticleTopImage()).into(heroIv);
 
         // Set tag
-        if (article.getTag() != null) {
+        if (article.getRedditFlair() != null) {
             tagTv.setVisibility(View.VISIBLE);
-            tagTv.setText(article.getTag());
+            tagTv.setText(article.getRedditFlair());
         } else {
             tagTv.setVisibility(View.GONE);
         }
 
         // Set time
-        timeTv.setText(MathUtil.getHumanTime(article.getTimePosted() * 1000));
+        timeTv.setText(MathUtil.getHumanTime(article.getRedditCreated() * 1000));
 
-        // Set flags
-        if (article.getFlags() > 0) {
-            flagTv.setVisibility(View.VISIBLE);
-            if ((article.getFlags() & Article.Flag.IS_NSFW) == Article.Flag.IS_NSFW) {
-                flagTv.setText("nsfw");
-            } else if ((article.getFlags() & Article.Flag.IS_TOP_NEWS) == Article.Flag.IS_TOP_NEWS) {
-                flagTv.setText("top news");
-            }
-        } else
-            flagTv.setVisibility(View.GONE);
+//        // Set flags
+//        if (article.get() > 0) {
+//            flagTv.setVisibility(View.VISIBLE);
+//            if ((article.getFlags() & Article.Flag.IS_NSFW) == Article.Flag.IS_NSFW) {
+//                flagTv.setText("nsfw");
+//            } else if ((article.getFlags() & Article.Flag.IS_TOP_NEWS) == Article.Flag.IS_TOP_NEWS) {
+//                flagTv.setText("top news");
+//            }
+//        } else
+//            flagTv.setVisibility(View.GONE);
     }
 
     //=======================================================================================

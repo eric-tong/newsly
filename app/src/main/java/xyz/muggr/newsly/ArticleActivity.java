@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import xyz.muggr.newsly.Articles.Article;
+import xyz.muggr.newsly.Articles.RedditArticle;
 import xyz.muggr.newsly.Utils.TransitionUtil;
 
 public class ArticleActivity extends NewslyActivity {
@@ -18,7 +18,7 @@ public class ArticleActivity extends NewslyActivity {
     public static final int requestCode = 100;
 
     private TextView headlineTv;
-    private Article currentArticle;
+    private RedditArticle currentArticle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,10 @@ public class ArticleActivity extends NewslyActivity {
 
         // Set hero image
         heroIv.setColorFilter(0x33000000);
-        Picasso.with(this).load(currentArticle.getHeroImageUrl()).into(heroIv);
+        Picasso.with(this).load(currentArticle.getArticleTopImage()).into(heroIv);
 
         // Set headline
-        headlineTv.setText(currentArticle.getHeadline());
+        headlineTv.setText(currentArticle.getRedditTitle());
         headlineTv.getLayoutParams().width = getIntent().getIntExtra("headlineTvWidth", ConstraintLayout.LayoutParams.MATCH_PARENT);
         headlineBkg.getLayoutParams().height = getIntent().getIntExtra("headlineTvHeight", 0);
 

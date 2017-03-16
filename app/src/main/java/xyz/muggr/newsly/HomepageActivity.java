@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
-import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.Articles.ArticleList;
+import xyz.muggr.newsly.Articles.RedditArticle;
 import xyz.muggr.newsly.Managers.ArticleQueueManager;
 import xyz.muggr.newsly.Managers.CardSwipeManager;
 import xyz.muggr.newsly.Managers.DatabaseManager;
@@ -71,7 +71,7 @@ public class HomepageActivity extends NewslyActivity implements CardSwipeManager
             return;
         }
 
-        Article currentArticle = articleQueue.get(0);
+        RedditArticle currentArticle = articleQueue.get(0);
         swipableCard.setArticle(currentArticle);
 
         if (articleQueue.size() > 1) {

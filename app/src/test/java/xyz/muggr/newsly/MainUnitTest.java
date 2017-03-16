@@ -2,9 +2,7 @@ package xyz.muggr.newsly;
 
 import org.junit.Test;
 
-import java.io.IOException;
-
-import xyz.muggr.newsly.Articles.Article;
+import xyz.muggr.newsly.Articles.RedditArticle;
 import xyz.muggr.newsly.Managers.ApiManager;
 
 
@@ -12,8 +10,8 @@ public class MainUnitTest {
     @Test
     public void getArticles() {
         try {
-            for (Article article : ApiManager.getRedditArticles()) {
-                System.out.print(article.getuId() + "\n");
+            for (RedditArticle article : ApiManager.getRedditArticles()) {
+                System.out.print(article.getRedditId() + "\n");
             }
         } catch (Exception e) {
             e.printStackTrace();

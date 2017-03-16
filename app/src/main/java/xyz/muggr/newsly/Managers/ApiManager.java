@@ -2,6 +2,8 @@ package xyz.muggr.newsly.Managers;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,8 +14,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.Articles.ArticleList;
+import xyz.muggr.newsly.Articles.RedditArticle;
 import xyz.muggr.newsly.BuildConfig;
 
 public class ApiManager {
@@ -77,9 +79,7 @@ public class ApiManager {
     public static ArticleList getRedditArticles() throws IOException, JSONException {
 
         // Open connection
-        URLConnection connection = (new URL("https://www.reddit.com/r/worldnews/.json?sort=top&t=all&limit=100")).openConnection();
-        connection.setRequestProperty("User-Agent",
-                String.format("android:xyz.muggr.newsly:v%1$s (by /u/regimme)", BuildConfig.VERSION_NAME));
+        URLConnection connection = (new URL("http://newsly.muggr.xyz/api/v1/cards")).openConnection();
         connection.setConnectTimeout(10000);
         connection.setReadTimeout(10000);
         connection.connect();
@@ -90,14 +90,14 @@ public class ApiManager {
         String inputString;
         while ((inputString = streamReader.readLine()) != null)
             jsonBuilder.append(inputString);
+        System.out.println(jsonBuilder.toString());
 
         // Parse json to ArticleList
         ArticleList articles = new ArticleList();
-        JSONArray listingJson = new JSONObject(jsonBuilder.toString()).getJSONObject("data").getJSONArray("children");
+        JSONArray listingJson = new JSONArray(jsonBuilder.toString());
+        Gson gson = new Gson();
         for (int i = 0; i < listingJson.length(); i++) {
-            JSONObject articleJson = listingJson.getJSONObject(i);
-            if (articleJson.getString("kind").equals("t3"))
-                articles.add(new Article(articleJson.getJSONObject("data")));
+            articles.add(gson.fromJson(listingJson.getJSONObject(i).toString(), RedditArticle.class));
         }
 
         return articles;
