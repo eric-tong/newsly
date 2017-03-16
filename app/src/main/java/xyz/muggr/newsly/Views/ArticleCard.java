@@ -19,6 +19,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import xyz.muggr.newsly.ArticleActivity;
 import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.NewslyActivity;
@@ -34,7 +37,8 @@ public class ArticleCard extends FrameLayout {
     private ImageView heroIv;
     private ImageView headlineBkg;
     private TextView headlineTv;
-    private TextView tagTv;
+    private ImageView flairBkg;
+    private TextView flairTv;
     private TextView domainTv;
     private TextView flagTv;
     private TextView timeTv;
@@ -91,7 +95,8 @@ public class ArticleCard extends FrameLayout {
         heroIv = (ImageView) findViewById(R.id.vie_card_article_hero_iv);
         headlineBkg = (ImageView) findViewById(R.id.vie_card_article_headline_bkg);
         headlineTv = (TextView) findViewById(R.id.vie_card_article_headline_tv);
-        tagTv = (TextView) findViewById(R.id.vie_card_article_tag_tv);
+        flairBkg = (ImageView) findViewById(R.id.vie_card_article_flair_bkg);
+        flairTv = (TextView) findViewById(R.id.vie_card_article_tag_tv);
         domainTv = (TextView) findViewById(R.id.vie_card_article_domain_tv);
         flagTv = (TextView) findViewById(R.id.vie_card_article_flag_tv);
         timeTv = (TextView) findViewById(R.id.vie_card_article_time_tv);
@@ -141,11 +146,11 @@ public class ArticleCard extends FrameLayout {
         Picasso.with(getContext()).load(article.getArticleTopImage()).into(heroIv);
 
         // Set tag
-        if (article.getRedditFlair() != null) {
-            tagTv.setVisibility(View.VISIBLE);
-            tagTv.setText(article.getRedditFlair());
+        if (currentArticle.getRedditFlair() != null) {
+            flairTv.setVisibility(View.VISIBLE);
+            flairTv.setText(currentArticle.getRedditFlair());
         } else {
-            tagTv.setVisibility(View.GONE);
+            flairTv.setVisibility(View.GONE);
         }
 
         // Set time
@@ -173,7 +178,6 @@ public class ArticleCard extends FrameLayout {
         return headlineTv;
     }
 
-
     //=======================================================================================
     //endregion
 
@@ -193,13 +197,18 @@ public class ArticleCard extends FrameLayout {
         activityIntent.putExtra("headlineTvHeight", headlineTv.getHeight());
 
         // Setup transition bundle
+        List<Pair<View, String>> viewNameList = new ArrayList<>();
+        viewNameList.add(new Pair<View, String>(heroIv, TransitionUtil.heroIvTransition));
+        viewNameList.add(new Pair<View, String>(headlineBkg, TransitionUtil.headlineBkgTransition));
+        viewNameList.add(new Pair<View, String>(headlineTv, TransitionUtil.headlineTvTransition));
+        viewNameList.add(new Pair<>(activity.getNavbar(), TransitionUtil.navbarTransition));
+        if (currentArticle.getRedditFlair() != null) {
+            viewNameList.add(new Pair<View, String>(flairBkg, TransitionUtil.flairBkgTransition));
+            viewNameList.add(new Pair<View, String>(flairTv, TransitionUtil.tagTvTransition));
+        }
+        Pair<View, String>[] array = viewNameList.toArray(new Pair[viewNameList.size()]);
         Bundle transitionBundle =
-                ActivityOptions.makeSceneTransitionAnimation(activity,
-                        new Pair<View, String>(heroIv, TransitionUtil.heroIvTransition),
-                        new Pair<View, String>(headlineBkg, TransitionUtil.headlineBkgTransition),
-                        new Pair<View, String>(headlineTv, TransitionUtil.headlineTvTransition),
-                        new Pair<>(activity.getNavbar(), TransitionUtil.navbarTransition)
-                ).toBundle();
+                ActivityOptions.makeSceneTransitionAnimation(activity, array).toBundle();
 
         // Start activity
         activity.startActivityForResult(activityIntent, ArticleActivity.requestCode, transitionBundle);

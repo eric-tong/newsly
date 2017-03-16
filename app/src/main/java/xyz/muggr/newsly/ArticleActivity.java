@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewCompat;
 import android.transition.Fade;
 import android.transition.Transition;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,8 @@ public class ArticleActivity extends NewslyActivity {
         ImageView heroIv = (ImageView) findViewById(R.id.act_article_hero_iv);
         ImageView headlineBkg = (ImageView) findViewById(R.id.act_article_headline_bkg);
         headlineTv = (TextView) findViewById(R.id.act_article_headline_tv);
+        ImageView flairBkg = (ImageView) findViewById(R.id.act_article_flair_bkg);
+        TextView flairTv = (TextView) findViewById(R.id.act_article_flair_tv);
 
         // Set hero image
         heroIv.setColorFilter(0x33000000);
@@ -44,6 +47,14 @@ public class ArticleActivity extends NewslyActivity {
         headlineTv.setText(currentArticle.getRedditTitle());
         headlineTv.getLayoutParams().width = getIntent().getIntExtra("headlineTvWidth", ConstraintLayout.LayoutParams.MATCH_PARENT);
         headlineBkg.getLayoutParams().height = getIntent().getIntExtra("headlineTvHeight", 0);
+
+        // Set flair
+        if (currentArticle.getRedditFlair() != null) {
+            flairTv.setVisibility(View.VISIBLE);
+            flairTv.setText(currentArticle.getRedditFlair());
+        } else {
+            flairTv.setVisibility(View.GONE);
+        }
 
         // Setup transitions
         Transition fade = new Fade();
@@ -56,6 +67,8 @@ public class ArticleActivity extends NewslyActivity {
         ViewCompat.setTransitionName(heroIv, TransitionUtil.heroIvTransition);
         ViewCompat.setTransitionName(headlineBkg, TransitionUtil.headlineBkgTransition);
         ViewCompat.setTransitionName(headlineTv, TransitionUtil.headlineTvTransition);
+        ViewCompat.setTransitionName(flairBkg, TransitionUtil.flairBkgTransition);
+        ViewCompat.setTransitionName(flairTv, TransitionUtil.tagTvTransition);
         ViewCompat.setTransitionName(getNavbar(), TransitionUtil.navbarTransition);
 
 //        // Set animation

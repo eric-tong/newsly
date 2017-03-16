@@ -20,6 +20,40 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
+        android:id="@+id/act_article_flair_bkg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/bkg_screen_top"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/act_article_flair_tv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/act_article_hero_iv"
+        app:layout_constraintRight_toRightOf="@+id/act_article_hero_iv"
+        app:layout_constraintTop_toTopOf="@+id/act_article_hero_iv" />
+
+    <TextView
+        android:id="@+id/act_article_flair_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alpha="0.8"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:letterSpacing="0.7"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="@+id/act_article_hero_iv"
+        app:layout_constraintLeft_toLeftOf="@+id/act_article_hero_iv"
+        app:layout_constraintRight_toRightOf="@+id/act_article_hero_iv"
+        app:layout_constraintTop_toTopOf="@+id/act_article_hero_iv"
+        app:layout_constraintVertical_bias="0.07999998" />
+
+    <ImageView
         android:id="@+id/act_article_headline_bkg"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -29,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/act_article_hero_iv"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/act_article_headline_tv"
