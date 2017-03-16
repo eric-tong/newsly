@@ -3,129 +3,150 @@ package xyz.muggr.newsly.Articles;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class Article implements Parcelable {
 
-    private String uId;
-    private String headline;
-    private String heroImageUrl;
-    private String domain;
-    private String tag;
-    private int flags;
-    private long timePosted;
+    // Reddit fields
+    String redditId;
+    long redditCreated;
+    String redditTitle;
+    String redditFlair;
+    boolean redditNsfw;
+    int redditScore;
 
-    private String url;
-
-    //region Constructors
-    //=======================================================================================
-
-    public Article() {
-    }
-
-    public Article(JSONObject articleData) throws JSONException {
-        setHeadline(articleData.getString("title"));
-        setDomain(articleData.getString("domain"));
-        if (!articleData.isNull("link_flair_text"))
-            setTag(articleData.getString("link_flair_text"));
-        setFlags(
-                (articleData.getLong("score") > 2000L ? Flag.IS_TOP_NEWS : 0) |
-                        (articleData.getBoolean("over_18") ? Flag.IS_NSFW : 0)
-        );
-        setTimePosted(articleData.getLong("created_utc"));
-        setUrl(articleData.getString("url"));
-        setTestImage();
-    }
-
-
-    //=======================================================================================
-    //endregion
+    // Article fields
+    String articleUrl;
+    String articleDomain;
+    String articleTitle;
+    String articleAuthors;
+    String articleText;
+    String articleTopImage;
+    String articleKeywords;
+    String articlePublishDate;
+    long timeRetrieved;
 
     //region Getters/Setters
     //=======================================================================================
 
-    public String getuId() {
-        return uId;
+    public String getRedditId() {
+        return redditId;
     }
 
-    public void setuId(String uId) {
-        this.uId = uId;
+    public void setRedditId(String redditId) {
+        this.redditId = redditId;
     }
 
-    public String getHeadline() {
-        return headline;
+    public long getRedditCreated() {
+        return redditCreated;
     }
 
-    public void setHeadline(String headline) {
-        this.headline = headline;
+    public void setRedditCreated(long redditCreated) {
+        this.redditCreated = redditCreated;
     }
 
-    public String getHeroImageUrl() {
-        return heroImageUrl;
+    public String getRedditTitle() {
+        return redditTitle;
     }
 
-    public void setHeroImageUrl(String heroImageUrl) {
-        this.heroImageUrl = heroImageUrl;
+    public void setRedditTitle(String redditTitle) {
+        this.redditTitle = redditTitle;
     }
 
-    public String getDomain() {
-        return domain;
+    public String getRedditFlair() {
+        return redditFlair;
     }
 
-    public void setDomain(String domain) {
-        this.domain = domain;
+    public void setRedditFlair(String redditFlair) {
+        this.redditFlair = redditFlair;
     }
 
-    public int getFlags() {
-        return flags;
+    public boolean isRedditNsfw() {
+        return redditNsfw;
     }
 
-    public void setFlags(int flags) {
-        this.flags = flags;
+    public void setRedditNsfw(boolean redditNsfw) {
+        this.redditNsfw = redditNsfw;
     }
 
-    public String getTag() {
-        return tag;
+    public int getRedditScore() {
+        return redditScore;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setRedditScore(int redditScore) {
+        this.redditScore = redditScore;
     }
 
-    public long getTimePosted() {
-        return timePosted;
+    public String getArticleUrl() {
+        return articleUrl;
     }
 
-    public void setTimePosted(long timePosted) {
-        this.timePosted = timePosted;
+    public void setArticleUrl(String articleUrl) {
+        this.articleUrl = articleUrl;
     }
 
-    public String getUrl() {
-        return url;
+    public String getArticleDomain() {
+        return articleDomain;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setArticleDomain(String articleDomain) {
+        this.articleDomain = articleDomain;
     }
 
-    //=======================================================================================
-    //endregion
-
-    //region Testing methods
-    //=======================================================================================
-
-    private void setTestImage() {
-        String[] heroImageUrls = new String[]{
-                "https://static.independent.co.uk/s3fs-public/styles/story_large/public/thumbnails/image/2016/03/24/20/16-chuka-umunna-get.jpg",
-                "http://ichef.bbci.co.uk/news/660/cpsprodpb/108DE/production/_94960876_c6p7ywcxeaas38r.jpg",
-                "http://ichef-1.bbci.co.uk/news/660/cpsprodpb/13286/production/_94907487_annricmalaysiashortlistopennature2017sonyworldphotographyawards.jpg",
-                "http://ichef.bbci.co.uk/news/660/cpsprodpb/17DAF/production/_94911779_yuliagrigoryantsarmeniashortlistprofessionaldailylife2017sonyworldphotographyawards.jpg",
-                "http://ichef.bbci.co.uk/news/660/cpsprodpb/7A26/production/_94907213_andrsgallardoalbajarspainshortlistopenstilllife2017sonyworldphotographyawards.jpg"
-        };
-
-        setHeroImageUrl(heroImageUrls[(int) (Math.random() * heroImageUrls.length)]);
+    public String getArticleTitle() {
+        return articleTitle;
     }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
+    }
+
+    public String getArticleAuthors() {
+        return articleAuthors;
+    }
+
+    public void setArticleAuthors(String articleAuthors) {
+        this.articleAuthors = articleAuthors;
+    }
+
+    public String getArticleText() {
+        return articleText;
+    }
+
+    public void setArticleText(String articleText) {
+        this.articleText = articleText;
+    }
+
+    public String getArticleTopImage() {
+        return articleTopImage;
+    }
+
+    public void setArticleTopImage(String articleTopImage) {
+        this.articleTopImage = articleTopImage;
+    }
+
+    public String getArticleKeywords() {
+        return articleKeywords;
+    }
+
+    public void setArticleKeywords(String articleKeywords) {
+        this.articleKeywords = articleKeywords;
+    }
+
+    public String getArticlePublishDate() {
+        return articlePublishDate;
+    }
+
+    public void setArticlePublishDate(String articlePublishDate) {
+        this.articlePublishDate = articlePublishDate;
+    }
+
+    public long getTimeRetrieved() {
+        return timeRetrieved;
+    }
+
+    public void setTimeRetrieved(long timeRetrieved) {
+        this.timeRetrieved = timeRetrieved;
+    }
+
 
     //=======================================================================================
     //endregion
@@ -140,25 +161,42 @@ public class Article implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.uId);
-        dest.writeString(this.headline);
-        dest.writeString(this.heroImageUrl);
-        dest.writeString(this.domain);
-        dest.writeString(this.tag);
-        dest.writeInt(this.flags);
-        dest.writeLong(this.timePosted);
-        dest.writeString(this.url);
+        dest.writeString(this.redditId);
+        dest.writeLong(this.redditCreated);
+        dest.writeString(this.redditTitle);
+        dest.writeString(this.redditFlair);
+        dest.writeByte(this.redditNsfw ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.redditScore);
+        dest.writeString(this.articleUrl);
+        dest.writeString(this.articleDomain);
+        dest.writeString(this.articleTitle);
+        dest.writeString(this.articleAuthors);
+        dest.writeString(this.articleText);
+        dest.writeString(this.articleTopImage);
+        dest.writeString(this.articleKeywords);
+        dest.writeString(this.articlePublishDate);
+        dest.writeLong(this.timeRetrieved);
+    }
+
+    public Article() {
     }
 
     protected Article(Parcel in) {
-        this.uId = in.readString();
-        this.headline = in.readString();
-        this.heroImageUrl = in.readString();
-        this.domain = in.readString();
-        this.tag = in.readString();
-        this.flags = in.readInt();
-        this.timePosted = in.readLong();
-        this.url = in.readString();
+        this.redditId = in.readString();
+        this.redditCreated = in.readLong();
+        this.redditTitle = in.readString();
+        this.redditFlair = in.readString();
+        this.redditNsfw = in.readByte() != 0;
+        this.redditScore = in.readInt();
+        this.articleUrl = in.readString();
+        this.articleDomain = in.readString();
+        this.articleTitle = in.readString();
+        this.articleAuthors = in.readString();
+        this.articleText = in.readString();
+        this.articleTopImage = in.readString();
+        this.articleKeywords = in.readString();
+        this.articlePublishDate = in.readString();
+        this.timeRetrieved = in.readLong();
     }
 
     public static final Parcelable.Creator<Article> CREATOR = new Parcelable.Creator<Article>() {
@@ -172,17 +210,6 @@ public class Article implements Parcelable {
             return new Article[size];
         }
     };
-
-    //=======================================================================================
-    //endregion
-
-    //region Keys
-    //=======================================================================================
-
-    public static class Flag {
-        public static final int IS_TOP_NEWS = 0b01;
-        public static final int IS_NSFW = 0b10;
-    }
 
     //=======================================================================================
     //endregion

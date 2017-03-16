@@ -2,7 +2,7 @@ package xyz.muggr.newsly;
 
 import org.junit.Test;
 
-import xyz.muggr.newsly.Articles.RedditArticle;
+import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.Managers.ApiManager;
 
 
@@ -10,7 +10,7 @@ public class MainUnitTest {
     @Test
     public void getArticles() {
         try {
-            for (RedditArticle article : ApiManager.getRedditArticles()) {
+            for (Article article : ApiManager.getRedditArticles()) {
                 System.out.print(article.getRedditId() + "\n");
             }
         } catch (Exception e) {

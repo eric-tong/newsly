@@ -15,7 +15,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import xyz.muggr.newsly.Articles.ArticleList;
-import xyz.muggr.newsly.Articles.RedditArticle;
+import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.BuildConfig;
 
 public class ApiManager {
@@ -97,7 +97,7 @@ public class ApiManager {
         JSONArray listingJson = new JSONArray(jsonBuilder.toString());
         Gson gson = new Gson();
         for (int i = 0; i < listingJson.length(); i++) {
-            articles.add(gson.fromJson(listingJson.getJSONObject(i).toString(), RedditArticle.class));
+            articles.add(gson.fromJson(listingJson.getJSONObject(i).toString(), Article.class));
         }
 
         return articles;

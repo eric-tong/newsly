@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import xyz.muggr.newsly.ArticleActivity;
-import xyz.muggr.newsly.Articles.RedditArticle;
+import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.NewslyActivity;
 import xyz.muggr.newsly.R;
 import xyz.muggr.newsly.Utils.MathUtil;
@@ -39,7 +39,7 @@ public class ArticleCard extends FrameLayout {
     private TextView flagTv;
     private TextView timeTv;
 
-    private RedditArticle currentArticle;
+    private Article currentArticle;
 
     //region Constructor
     //=======================================================================================
@@ -130,7 +130,7 @@ public class ArticleCard extends FrameLayout {
     //region Setters
     //=======================================================================================
 
-    public void setArticle(RedditArticle article) {
+    public void setArticle(Article article) {
         this.currentArticle = article;
 
         // Set content

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import xyz.muggr.newsly.Articles.RedditArticle;
+import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.Utils.TransitionUtil;
 
 public class ArticleActivity extends NewslyActivity {
@@ -18,7 +18,7 @@ public class ArticleActivity extends NewslyActivity {
     public static final int requestCode = 100;
 
     private TextView headlineTv;
-    private RedditArticle currentArticle;
+    private Article currentArticle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
