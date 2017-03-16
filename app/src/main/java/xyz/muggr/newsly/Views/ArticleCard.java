@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -143,14 +144,27 @@ public class ArticleCard extends FrameLayout {
         domainTv.setText(article.getArticleDomain());
 
         // Set image
-        Picasso.with(getContext()).load(article.getArticleTopImage()).into(heroIv);
+        headlineBkg.setVisibility(View.INVISIBLE);
+        Picasso.with(getContext()).load(article.getArticleTopImage()).into(heroIv, new Callback() {
+            @Override
+            public void onSuccess() {
+                headlineBkg.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
 
         // Set tag
         if (currentArticle.getRedditFlair() != null) {
+            flairBkg.setVisibility(View.VISIBLE);
             flairTv.setVisibility(View.VISIBLE);
             flairTv.setText(currentArticle.getRedditFlair());
         } else {
-            flairTv.setVisibility(View.GONE);
+            flairBkg.setVisibility(View.INVISIBLE);
+            flairTv.setVisibility(View.INVISIBLE);
         }
 
         // Set time
@@ -166,16 +180,6 @@ public class ArticleCard extends FrameLayout {
 //            }
 //        } else
 //            flagTv.setVisibility(View.GONE);
-    }
-
-    //=======================================================================================
-    //endregion
-
-    //region Getters
-    //=======================================================================================
-
-    public TextView getHeadlineTv() {
-        return headlineTv;
     }
 
     //=======================================================================================
@@ -206,7 +210,7 @@ public class ArticleCard extends FrameLayout {
             viewNameList.add(new Pair<View, String>(flairBkg, TransitionUtil.flairBkgTransition));
             viewNameList.add(new Pair<View, String>(flairTv, TransitionUtil.tagTvTransition));
         }
-        Pair<View, String>[] array = viewNameList.toArray(new Pair[viewNameList.size()]);
+        @SuppressWarnings("unchecked") Pair<View, String>[] array = viewNameList.toArray(new Pair[viewNameList.size()]);
         Bundle transitionBundle =
                 ActivityOptions.makeSceneTransitionAnimation(activity, array).toBundle();
 

@@ -50,10 +50,9 @@ public class ArticleActivity extends NewslyActivity {
 
         // Set flair
         if (currentArticle.getRedditFlair() != null) {
+            flairBkg.setVisibility(View.VISIBLE);
             flairTv.setVisibility(View.VISIBLE);
             flairTv.setText(currentArticle.getRedditFlair());
-        } else {
-            flairTv.setVisibility(View.GONE);
         }
 
         // Setup transitions
