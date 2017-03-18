@@ -3,6 +3,8 @@ package xyz.muggr.newsly;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.view.View;
@@ -31,6 +33,11 @@ public class ArticleActivity extends NewslyActivity {
 
         // Set screen
         setLightStatusBar();
+
+        // Setup RecyclerView
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.act_article_rv);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
         // Get views
         ImageView heroIv = (ImageView) findViewById(R.id.act_article_hero_iv);
