@@ -8,13 +8,14 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null">
+        android:background="@null"
+        app:elevation="0dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            app:layout_scrollFlags="scroll">
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
 
             <include layout="@layout/act_article_header" />
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -25,5 +26,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <View
+        android:id="@+id/nav_bg"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_gravity="top"
+        android:background="@color/statusbar" />
 
 </android.support.design.widget.CoordinatorLayout>
