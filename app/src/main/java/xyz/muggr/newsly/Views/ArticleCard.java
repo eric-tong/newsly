@@ -215,7 +215,7 @@ public class ArticleCard extends FrameLayout {
                 ActivityOptions.makeSceneTransitionAnimation(activity, array).toBundle();
 
         // Start activity
-        activity.startActivityForResult(activityIntent, ArticleActivity.requestCode, transitionBundle);
+        activity.startActivity(activityIntent, transitionBundle);
     }
 
     //=======================================================================================

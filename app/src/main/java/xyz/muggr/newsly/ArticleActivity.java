@@ -13,14 +13,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import xyz.muggr.newsly.Adapters.ArticleAdapter;
 import xyz.muggr.newsly.Articles.Article;
 import xyz.muggr.newsly.Utils.TransitionUtil;
 
 public class ArticleActivity extends NewslyActivity {
 
-    public static final int requestCode = 100;
-
-    private TextView headlineTv;
     private Article currentArticle;
 
     @Override
@@ -38,11 +36,12 @@ public class ArticleActivity extends NewslyActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.act_article_rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new ArticleAdapter());
 
         // Get views
         ImageView heroIv = (ImageView) findViewById(R.id.act_article_hero_iv);
         ImageView headlineBkg = (ImageView) findViewById(R.id.act_article_headline_bkg);
-        headlineTv = (TextView) findViewById(R.id.act_article_headline_tv);
+        TextView headlineTv = (TextView) findViewById(R.id.act_article_headline_tv);
         ImageView flairBkg = (ImageView) findViewById(R.id.act_article_flair_bkg);
         TextView flairTv = (TextView) findViewById(R.id.act_article_flair_tv);
 
@@ -76,33 +75,6 @@ public class ArticleActivity extends NewslyActivity {
         ViewCompat.setTransitionName(flairBkg, TransitionUtil.flairBkgTransition);
         ViewCompat.setTransitionName(flairTv, TransitionUtil.tagTvTransition);
         ViewCompat.setTransitionName(getNavbar(), TransitionUtil.navbarTransition);
-
-//        // Set animation
-//        headlineTv.animate().alpha(0).setDuration(300).setListener(
-//                new AnimatorListenerAdapter() {
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        super.onAnimationEnd(animation);
-//                        headlineTv.setText("Article Title");
-//                        headlineTv.animate().alpha(1).setDuration(300);
-//                    }
-//                }
-//        );
     }
 
-    @Override
-    public void onBackPressed() {
-        // Set animation
-//        headlineTv.animate().alpha(0).setDuration(200).setListener(
-//                new AnimatorListenerAdapter() {
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-//                        super.onAnimationEnd(animation);
-//                        headlineTv.setAlpha(0);
-//                    }
-//                }
-//        );
-
-        super.onBackPressed();
-    }
 }
