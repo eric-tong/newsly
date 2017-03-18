@@ -101,7 +101,7 @@ public class NewslyActivity extends AppCompatActivity {
     //=======================================================================================
 
     public View getNavbar() {
-        return findViewById(R.id.nav_bg);
+        return findViewById(R.id.nav_bkg);
     }
 
     public static Animator fadeView(View view, float from, float to, long delay, long duration) {

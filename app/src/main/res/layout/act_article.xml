@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/act_article_appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -28,10 +29,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <View
-        android:id="@+id/nav_bg"
+        android:id="@+id/nav_bkg"
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:layout_gravity="top"
+        android:alpha="0.2"
         android:background="@color/statusbar" />
 
 </android.support.design.widget.CoordinatorLayout>

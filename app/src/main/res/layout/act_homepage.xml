@@ -38,9 +38,10 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <View
-        android:id="@+id/nav_bg"
+        android:id="@+id/nav_bkg"
         android:layout_width="0dp"
         android:layout_height="24dp"
+        android:alpha="0.2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
