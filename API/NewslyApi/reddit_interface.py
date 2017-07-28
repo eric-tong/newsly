@@ -3,19 +3,18 @@ import json
 import requests
 import time
 
-from newspaper import Article
+from newspaper import Article, ArticleException
 
 from NewslyApi.models import RedditArticle
 
 
 class Downloader(object):
-
     @staticmethod
     def download():
         # Get reddit feed
         reddit_params = {"limit": 10}
         reddit_headers = {'user-agent': 'android:xyz.muggr.newsly.api:v0.0.3 (by /u/regimme)'}
-        reddit_url = 'https://www.reddit.com/r/worldnews/.json?limit=10'
+        reddit_url = 'https://www.reddit.com/r/worldnews/top/.json?sort=top&t=day'
         reddit_feed = requests.get(reddit_url, params=reddit_params, headers=reddit_headers)
 
         # Parse JSON
@@ -24,7 +23,7 @@ class Downloader(object):
         # Save
         current_time = time.time()
 
-        for reddit_post in reddit_data['data']['children']:
+        for index, reddit_post in enumerate(reddit_data['data']['children']):
             # Add reddit data
             reddit_post_data = reddit_post['data']
             reddit_article = RedditArticle()
@@ -37,11 +36,15 @@ class Downloader(object):
             reddit_article.article_url = reddit_post_data['url']
             reddit_article.article_domain = reddit_post_data['domain']
             reddit_article.time_retrieved = current_time
+            reddit_article.reddit_rank = index
 
             # Get newspaper data
             article = Article(reddit_article.article_url, keep_article_html=True)
             article.download()
-            article.parse()
+            try:
+                article.parse()
+            except ArticleException:
+                continue
             reddit_article.article_title = article.title
             reddit_article.article_authors = article.authors
             reddit_article.article_text = article.article_html

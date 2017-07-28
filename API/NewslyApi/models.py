@@ -9,6 +9,7 @@ class RedditArticle(models.Model):
     reddit_flair = models.TextField(null=True)
     reddit_nsfw = models.BooleanField(default=False)
     reddit_score = models.IntegerField(default=0)
+    reddit_rank = models.IntegerField(default=0)
 
     # Article fields
     article_url = models.URLField(null=True)
@@ -23,3 +24,6 @@ class RedditArticle(models.Model):
 
     def __str__(self):
         return self.reddit_title
+
+    class Meta:
+        ordering = ['-time_retrieved', 'reddit_rank', ]
