@@ -1,9 +1,8 @@
 import json
 import re
-
-import requests
 import time
 
+import requests
 from newspaper import Article, ArticleException
 
 from NewslyApi.models import RedditArticle
@@ -23,6 +22,7 @@ class Downloader(object):
 
         # Save
         current_time = time.time()
+        print('run' + current_time)
 
         for index, reddit_post in enumerate(reddit_data['data']['children']):
             # Add reddit data
@@ -48,7 +48,7 @@ class Downloader(object):
                 continue
             reddit_article.article_title = article.title
             reddit_article.article_authors = article.authors
-            reddit_article.article_text = article.article_html
+            reddit_article.article_text = Downloader.sanitize_content(article.article_html)
             reddit_article.article_top_image = article.top_image
             reddit_article.article_publish_date = article.publish_date
 
@@ -69,6 +69,8 @@ class Downloader(object):
         content = content.replace('\n', '')
         content = content.replace('\r', '')
         content = content.replace('\t', '')
+        content = content.replace('<b>', '')
+        content = content.replace('</b>', '')
 
         # Content to paragraphs list
         paragraph_list = list()

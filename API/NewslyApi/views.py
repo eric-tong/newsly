@@ -12,8 +12,6 @@ def cards(request):
         Downloader.download()
 
     reddit_articles = list(RedditArticle.objects.all())
-    for reddit_article in reddit_articles:
-        reddit_article.article_text = Downloader.sanitize_content(reddit_article.article_text)
 
     return HttpResponse(json.dumps(reddit_articles, default=json_default))
 
