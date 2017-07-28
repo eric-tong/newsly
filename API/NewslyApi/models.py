@@ -3,23 +3,23 @@ from django.db import models
 
 class RedditArticle(models.Model):
     # Reddit fields
-    redditId = models.CharField(max_length=255, primary_key=True, default='', unique=True)
-    redditCreated = models.IntegerField(default=0)
-    redditTitle = models.TextField(null=True)
-    redditFlair = models.TextField(null=True)
-    redditNsfw = models.BooleanField(default=False)
-    redditScore = models.IntegerField(default=0)
+    reddit_id = models.CharField(max_length=255, primary_key=True, default='', unique=True)
+    reddit_created = models.IntegerField(default=0)
+    reddit_title = models.TextField(null=True)
+    reddit_flair = models.TextField(null=True)
+    reddit_nsfw = models.BooleanField(default=False)
+    reddit_score = models.IntegerField(default=0)
 
     # Article fields
-    articleUrl = models.URLField(null=True)
-    articleDomain = models.URLField(null=True)
-    articleTitle = models.TextField(null=True)
-    articleAuthors = models.TextField(null=True)
-    articleText = models.TextField(null=True)
-    articleTopImage = models.URLField(null=True)
-    articleKeywords = models.TextField(null=True)
-    articlePublishDate = models.TextField(null=True)
-    timeRetrieved = models.IntegerField(default=0)
+    article_url = models.URLField(null=True)
+    article_domain = models.URLField(null=True)
+    article_title = models.TextField(null=True)
+    article_authors = models.TextField(null=True)
+    article_text = models.TextField(null=True)
+    article_top_image = models.URLField(null=True)
+    article_keywords = models.TextField(null=True)
+    article_publish_date = models.TextField(null=True)
+    time_retrieved = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.redditTitle
+        return self.reddit_title

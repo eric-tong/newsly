@@ -28,33 +28,30 @@ class Downloader(object):
             # Add reddit data
             reddit_post_data = reddit_post['data']
             reddit_article = RedditArticle()
-            reddit_article.redditId = reddit_post_data['id']
-            reddit_article.redditTitle = reddit_post_data['title']
-            reddit_article.redditCreated = reddit_post_data['created']
-            reddit_article.redditFlair = reddit_post_data['link_flair_text']
-            reddit_article.redditNsfw = reddit_post_data['over_18']
-            reddit_article.redditScore = reddit_post_data['score']
-            reddit_article.articleUrl = reddit_post_data['url']
-            reddit_article.articleDomain = reddit_post_data['domain']
-            reddit_article.timeRetrieved = current_time
+            reddit_article.reddit_id = reddit_post_data['id']
+            reddit_article.reddit_title = reddit_post_data['title']
+            reddit_article.reddit_created = reddit_post_data['created']
+            reddit_article.reddit_flair = reddit_post_data['link_flair_text']
+            reddit_article.reddit_nsfw = reddit_post_data['over_18']
+            reddit_article.reddit_score = reddit_post_data['score']
+            reddit_article.article_url = reddit_post_data['url']
+            reddit_article.article_domain = reddit_post_data['domain']
+            reddit_article.time_retrieved = current_time
 
             # Get newspaper data
-            article = Article(reddit_article.articleUrl, keep_article_html=True)
+            article = Article(reddit_article.article_url, keep_article_html=True)
             article.download()
-            if not article.is_downloaded:
-                print(reddit_article.articleUrl)
-                continue
             article.parse()
-            reddit_article.articleTitle = article.title
-            reddit_article.articleAuthors = article.authors
-            reddit_article.articleText = article.article_html
-            reddit_article.articleTopImage = article.top_image
-            reddit_article.articlePublishDate = article.publish_date
+            reddit_article.article_title = article.title
+            reddit_article.article_authors = article.authors
+            reddit_article.article_text = article.article_html
+            reddit_article.article_top_image = article.top_image
+            reddit_article.article_publish_date = article.publish_date
 
             # Get nlp data
             if not article.is_parsed:
-                print(reddit_article.articleUrl)
+                print(reddit_article.article_url)
                 continue
             article.nlp()
-            reddit_article.articleKeywords = article.keywords
+            reddit_article.article_keywords = article.keywords
             reddit_article.save()
