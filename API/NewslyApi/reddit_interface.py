@@ -1,4 +1,5 @@
 import json
+import re
 
 import requests
 import time
@@ -58,3 +59,44 @@ class Downloader(object):
             article.nlp()
             reddit_article.article_keywords = article.keywords
             reddit_article.save()
+
+    @staticmethod
+    def sanitize_content(content):
+
+        # Remove unwanted chars
+        while '  ' in content:
+            content = content.replace('  ', ' ')
+        content = content.replace('\n', '')
+        content = content.replace('\r', '')
+        content = content.replace('\t', '')
+
+        # Content to paragraphs list
+        paragraph_list = list()
+        inside_p_tag = False
+        save_to_list = False
+        current_paragraph = ''
+        for i in range(0, len(content) - 4):
+
+            if save_to_list:
+                if content[i:i + 4] == '</p>':
+                    save_to_list = False
+                    if len(re.findall(' ', current_paragraph)) > 10:
+                        paragraph_list.append(current_paragraph.rstrip())
+                    current_paragraph = ''
+                else:
+                    current_paragraph += content[i]
+
+            elif inside_p_tag and content[i] == '>':
+                save_to_list = True
+                inside_p_tag = False
+            elif content[i:i + 2] == '<p':
+                inside_p_tag = True
+
+        # List to html
+        # content_html = ''
+        # for text in paragraph_list:
+        #     content_html += '<br />' + text + '<br />'
+        #
+        # return content_html
+
+        return paragraph_list

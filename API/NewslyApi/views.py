@@ -11,7 +11,11 @@ def cards(request):
     if request.GET.get('refresh'):
         Downloader.download()
 
-    return HttpResponse(json.dumps(list(RedditArticle.objects.all()), default=json_default))
+    reddit_articles = list(RedditArticle.objects.all())
+    for reddit_article in reddit_articles:
+        reddit_article.article_text = Downloader.sanitize_content(reddit_article.article_text)
+
+    return HttpResponse(json.dumps(reddit_articles, default=json_default))
 
 
 def article(request):
