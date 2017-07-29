@@ -127,7 +127,7 @@ class ArticleCard : FrameLayout {
         })
 
         // Set tag
-        if (currentArticle.getRedditFlair() != null) {
+        if (currentArticle.redditFlair != null) {
             flairBkg.visibility = View.VISIBLE
             flairTv.visibility = View.VISIBLE
             flairTv.text = currentArticle.redditFlair
