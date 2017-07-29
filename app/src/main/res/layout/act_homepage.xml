@@ -10,25 +10,24 @@
         android:id="@+id/imageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_gravity="top|left"
+        android:layout_gravity="top|start"
         android:layout_marginTop="@dimen/status_bar_height"
-        android:onClick="onButtonClick"
         android:padding="12dp"
         android:src="@drawable/abc_ic_menu_overflow_material"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <xyz.muggr.newsly.Views.ArticleCard
-        android:id="@+id/act_homepage_transition_card"
+        android:id="@+id/transitionCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/act_homepage_swipable_card"
-        app:layout_constraintLeft_toLeftOf="@+id/act_homepage_swipable_card"
-        app:layout_constraintRight_toRightOf="@+id/act_homepage_swipable_card"
-        app:layout_constraintTop_toTopOf="@+id/act_homepage_swipable_card" />
+        app:layout_constraintBottom_toBottomOf="@+id/swipableCard"
+        app:layout_constraintLeft_toLeftOf="@+id/swipableCard"
+        app:layout_constraintRight_toRightOf="@+id/swipableCard"
+        app:layout_constraintTop_toTopOf="@+id/swipableCard" />
 
     <xyz.muggr.newsly.Views.ArticleCard
-        android:id="@+id/act_homepage_swipable_card"
+        android:id="@+id/swipableCard"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="80dp"
