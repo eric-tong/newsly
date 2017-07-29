@@ -96,7 +96,7 @@ open class NewslyActivity : AppCompatActivity() {
     //=======================================================================================
 
     val navbar: View
-        get() = findViewById(R.id.nav_bkg)
+        get() = findViewById(R.id.navBkg)
 
     companion object {
 

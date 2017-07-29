@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <View
-        android:id="@+id/nav_bkg"
+        android:id="@+id/navBkg"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:alpha="0.2"
