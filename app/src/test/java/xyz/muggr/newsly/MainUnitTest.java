@@ -10,7 +10,7 @@ public class MainUnitTest {
     @Test
     public void getArticles() {
         try {
-            for (Article article : ApiManager.getRedditArticles()) {
+            for (Article article : ApiManager.INSTANCE.getRedditArticles()) {
                 System.out.print(article.getRedditId() + "\n");
             }
         } catch (Exception e) {
@@ -21,7 +21,7 @@ public class MainUnitTest {
     @Test
     public void getUuid() {
         try {
-            System.out.print(ApiManager.getUuid());
+            System.out.print(ApiManager.INSTANCE.getUuid());
         } catch (Exception e) {
             e.printStackTrace();
         }
