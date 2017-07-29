@@ -77,8 +77,8 @@ public class ArticleCard extends FrameLayout {
 
         // Get resources
         final NewslyActivity activity = (NewslyActivity) getContext();
-        SCREEN_SIZE = activity.SCREEN_SIZE;
-        DP_1 = activity.DP_1;
+        SCREEN_SIZE = activity.getSCREEN_SIZE();
+        DP_1 = activity.getDP_1();
 
         // Set params
         final int SHADOW_RADIUS = 10 * DP_1;

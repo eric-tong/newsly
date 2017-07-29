@@ -44,7 +44,7 @@ public class CardSwipeManager implements View.OnTouchListener {
 
         // GET RESOURCES
         this.activity = activity;
-        SCREEN_SIZE = ((NewslyActivity) activity).SCREEN_SIZE;
+        SCREEN_SIZE = ((NewslyActivity) activity).getSCREEN_SIZE();
         DP_1 = activity.DP_1;
         MINIMUM_DRAG_DISTANCE = SCREEN_SIZE[0] / 3;
         MINIMUM_FLING_VELOCITY = SCREEN_SIZE[0] * 2;
