@@ -1,14 +1,14 @@
 import schedule
 import time
 
-from NewslyApi import reddit_interface
+from NewslyApi.reddit_interface import Downloader
 
 
 def start():
     print('Start reddit interface')
 
-    reddit_url = 'https://www.reddit.com/r/worldnews/.json?limit=20'
-    schedule.every(10).minutes.do(reddit_interface.Downloader.download(reddit_url))
+    reddit_url = 'https://www.reddit.com/r/worldnews/.json?'
+    schedule.every(10).minutes.do(Downloader.download, reddit_url)
 
     while True:
         schedule.run_pending()

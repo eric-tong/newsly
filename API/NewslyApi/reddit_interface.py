@@ -12,8 +12,8 @@ class Downloader(object):
     @staticmethod
     def download(reddit_url):
         # Get reddit feed
-        reddit_params = {"limit": 10}
-        reddit_headers = {'user-agent': 'android:xyz.muggr.newsly.api:v0.0.3 (by /u/regimme)'}
+        reddit_params = {"limit": 100}
+        reddit_headers = {'user-agent': 'android:xyz.muggr.newsly.api:v0.0.4 (by /u/regimme)'}
         reddit_feed = requests.get(reddit_url, params=reddit_params, headers=reddit_headers)
 
         # Parse JSON
@@ -21,9 +21,12 @@ class Downloader(object):
 
         # Save
         current_time = time.time()
-        print('Get feed' + current_time)
+        print('Start feed getter ' + str(current_time))
 
         for index, reddit_post in enumerate(reddit_data['data']['children']):
+
+            print('Feed ' + str(index))
+
             # Add reddit data
             reddit_post_data = reddit_post['data']
             reddit_article = RedditArticle()
@@ -58,6 +61,8 @@ class Downloader(object):
             article.nlp()
             reddit_article.article_keywords = article.keywords
             reddit_article.save()
+
+        print('Complete feed getter ' + str(current_time))
 
     @staticmethod
     def sanitize_content(content):
