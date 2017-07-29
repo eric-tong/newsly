@@ -9,7 +9,7 @@ from NewslyApi.reddit_interface import Downloader
 
 def cards(request):
     if request.GET.get('refresh'):
-        Downloader.download()
+        Downloader.download('https://www.reddit.com/r/worldnews/.json?limit=20')
 
     reddit_articles = list(RedditArticle.objects.all())
 

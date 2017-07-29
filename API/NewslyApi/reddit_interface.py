@@ -21,7 +21,7 @@ class Downloader(object):
 
         # Save
         current_time = time.time()
-        print('run' + current_time)
+        print('Get feed' + current_time)
 
         for index, reddit_post in enumerate(reddit_data['data']['children']):
             # Add reddit data
