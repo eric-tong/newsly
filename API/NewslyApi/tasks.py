@@ -1,13 +1,12 @@
 import schedule
 import time
 
-
-def job():
-    print("I'm working...")
+from NewslyApi import reddit_interface
 
 
 def start():
-    schedule.every(10).minutes.do(job)
+    reddit_url = 'https://www.reddit.com/r/worldnews/.json?limit=20'
+    schedule.every(10).minutes.do(reddit_interface.Downloader.download(reddit_url))
 
     while True:
         schedule.run_pending()

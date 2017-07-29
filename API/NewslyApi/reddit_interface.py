@@ -10,11 +10,10 @@ from NewslyApi.models import RedditArticle
 
 class Downloader(object):
     @staticmethod
-    def download():
+    def download(reddit_url):
         # Get reddit feed
         reddit_params = {"limit": 10}
         reddit_headers = {'user-agent': 'android:xyz.muggr.newsly.api:v0.0.3 (by /u/regimme)'}
-        reddit_url = 'https://www.reddit.com/r/worldnews/top/.json?sort=top&t=day'
         reddit_feed = requests.get(reddit_url, params=reddit_params, headers=reddit_headers)
 
         # Parse JSON
