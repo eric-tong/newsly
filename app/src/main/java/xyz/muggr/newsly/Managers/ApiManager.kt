@@ -77,9 +77,6 @@ object ApiManager {
     //region Testing methods
     //=======================================================================================
 
-    // Open connection
-    // Read inputStream
-    // Parse json to ArticleList
     val redditArticles: ArticleList
         @Throws(IOException::class, JSONException::class)
         get() {
