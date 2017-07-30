@@ -14,20 +14,31 @@ def cards(request):
     reddit_articles = list(RedditArticle.objects.raw('SELECT '
                                                      'reddit_id, '
                                                      'reddit_id AS redditId, '
+                                                     'reddit_created AS redditCreated, '
                                                      'reddit_title AS redditTitle, '
-                                                     'article_domain AS articleDomain, '
-                                                     'article_top_image AS articleTopImage, '
                                                      'reddit_flair AS redditFlair, '
-                                                     'reddit_created AS redditCreated '
+                                                     'article_domain AS articleDomain, '
+                                                     'article_top_image AS articleTopImage '
                                                      'FROM NewslyApi_redditarticle '
                                                      'ORDER BY time_retrieved DESC, reddit_rank'))
 
     return HttpResponse(json.dumps(reddit_articles, default=json_default))
 
 
-def article(request):
-    reddit_id = os.path.basename(os.path.normpath(request.get_full_path()))
-    return HttpResponse(json.dumps(RedditArticle.objects.get(redditId=reddit_id), default=json_default))
+def article(request, reddit_id):
+    reddit_article = list(RedditArticle.objects.raw('SELECT '
+                                                    'reddit_id, '
+                                                    'reddit_id AS redditId, '
+                                                    'reddit_created AS redditCreated, '
+                                                    'reddit_title AS redditTitle, '
+                                                    'reddit_flair AS redditFlair, '
+                                                    'article_url AS articleUrl, '
+                                                    'article_domain AS articleDomain, '
+                                                    'article_text AS articleText, '
+                                                    'article_top_image AS articleTopImage, '
+                                                    'article_publish_date AS articlePublishDate '
+                                                    'FROM NewslyApi_redditarticle WHERE reddit_id = %s', [reddit_id]))
+    return HttpResponse(json.dumps(reddit_article[0], default=json_default))
 
 
 def json_default(self):
