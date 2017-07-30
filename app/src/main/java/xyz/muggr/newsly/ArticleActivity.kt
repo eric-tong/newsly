@@ -37,7 +37,8 @@ class ArticleActivity : NewslyActivity(), AppBarLayout.OnOffsetChangedListener {
 
         // Set hero image
         articleTopImageIv.setColorFilter(0x33000000)
-        Picasso.with(this).load(currentArticle.articleTopImage).into(articleTopImageIv)
+        if (!currentArticle.articleTopImage.isNullOrEmpty())
+            Picasso.with(this).load(currentArticle.articleTopImage).into(articleTopImageIv)
 
         // Set headline
         redditTitleTv.text = currentArticle.redditTitle

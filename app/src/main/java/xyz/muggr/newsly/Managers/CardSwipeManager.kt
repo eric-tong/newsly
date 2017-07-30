@@ -2,6 +2,7 @@ package xyz.muggr.newsly.Managers
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v4.view.animation.LinearOutSlowInInterpolator
 import android.view.MotionEvent
@@ -63,9 +64,9 @@ class CardSwipeManager(private val activity: SwipableCards, private val swipable
 
     }
 
-    fun fling(state: Int, velocityX: Float, velocityY: Float) {
-        var velocityX = velocityX
-        var velocityY = velocityY
+    fun fling(state: Int, currentVelocityX: Float, currentVelocityY: Float) {
+        var velocityX = currentVelocityX
+        var velocityY = currentVelocityY
 
         // CHECK IF FLINGING FROM REST (IF TRUE, POSITION Y WILL DETERMINE VELOCITY Y)
         val flingFromRest = velocityX == 0f && velocityY == 0f
@@ -115,6 +116,7 @@ class CardSwipeManager(private val activity: SwipableCards, private val swipable
     //region ON TOUCH METHODS
     //=======================================================================================
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View?, motionEvent: MotionEvent): Boolean {
 
         // GET VELOCITY TRACKER
@@ -218,10 +220,6 @@ class CardSwipeManager(private val activity: SwipableCards, private val swipable
 
     interface SwipableCards {
         fun onSwipe(state: Int)
-
-        companion object {
-            val DP_1 = 3
-        }
     }
 
     //=======================================================================================
