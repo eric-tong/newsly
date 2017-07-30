@@ -39,6 +39,8 @@ class ArticleActivity : NewslyActivity(), AppBarLayout.OnOffsetChangedListener {
         articleTopImageIv.setColorFilter(0x33000000)
         if (!currentArticle.articleTopImage.isNullOrEmpty())
             Picasso.with(this).load(currentArticle.articleTopImage).into(articleTopImageIv)
+        else
+            articleTopImageIv.setImageResource(R.drawable.bkg_loading_placeholder)
 
         // Set headline
         redditTitleTv.text = currentArticle.redditTitle
