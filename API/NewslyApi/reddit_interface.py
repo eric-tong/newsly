@@ -1,3 +1,4 @@
+import datetime
 import json
 import re
 import time
@@ -21,7 +22,7 @@ class Downloader(object):
 
         # Save
         current_time = time.time()
-        print('Start feed getter ' + str(current_time))
+        print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Start feed getter')
 
         for index, reddit_post in enumerate(reddit_data['data']['children']):
 
@@ -62,7 +63,7 @@ class Downloader(object):
             reddit_article.article_keywords = article.keywords
             reddit_article.save()
 
-        print('Complete feed getter ' + str(current_time))
+        print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Complete feed getter')
 
     @staticmethod
     def sanitize_content(content):
