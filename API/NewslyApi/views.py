@@ -38,7 +38,7 @@ def article(request, reddit_id):
                                                     'article_top_image AS articleTopImage, '
                                                     'article_publish_date AS articlePublishDate '
                                                     'FROM NewslyApi_redditarticle WHERE reddit_id = %s', [reddit_id]))
-    return HttpResponse(json.dumps(reddit_article[0], default=json_default))
+    return HttpResponse(json.dumps(reddit_article, default=json_default))
 
 
 def json_default(self):

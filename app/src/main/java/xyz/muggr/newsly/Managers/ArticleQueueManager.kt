@@ -2,8 +2,6 @@ package xyz.muggr.newsly.Managers
 
 import android.database.sqlite.SQLiteDatabase
 import android.os.AsyncTask
-import android.util.Log
-
 import xyz.muggr.newsly.Articles.ArticleList
 import xyz.muggr.newsly.BuildConfig
 import xyz.muggr.newsly.NewslyActivity
@@ -22,12 +20,7 @@ class ArticleQueueManager(private val activity: NewslyActivity) {
     //=======================================================================================
 
     fun load(listener: ArticleQueueListener) {
-
-        if (articleQueue.size < 2)
-            GetArticleListTask(articleQueue, listener).execute()
-        else
-            listener.onArticleQueueLoaded(articleQueue)
-
+        GetArticleListTask(articleQueue, listener).execute()
     }
 
     fun dismiss(state: Int) {
@@ -38,15 +31,15 @@ class ArticleQueueManager(private val activity: NewslyActivity) {
 
     //=======================================================================================
     //endregion
-    
+
     //region Asynctasks
     //=======================================================================================
 
-    class GetArticleListTask(private val articleQueue: ArticleList, private val listener: ArticleQueueListener): AsyncTask<Void, Void, ArticleList>() {
+    class GetArticleListTask(private val articleQueue: ArticleList, private val listener: ArticleQueueListener) : AsyncTask<Void, Void, ArticleList>() {
 
         override fun doInBackground(vararg params: Void): ArticleList? {
             try {
-                return ApiManager.redditArticles
+                return ApiManager.getCards()
             } catch (e: Exception) {
                 if (BuildConfig.DEBUG)
                     e.printStackTrace()
@@ -61,18 +54,10 @@ class ArticleQueueManager(private val activity: NewslyActivity) {
                 articleQueue.addAll(articleList)
             }
             listener.onArticleQueueLoaded(articleQueue)
-
-            if (BuildConfig.DEBUG)
-                for (i in articleQueue.indices) {
-                    Log.d(
-                            String.format("Queue %02d", i),
-                            articleQueue[i].redditTitle
-                    )
-                }
         }
 
     }
-    
+
     //=======================================================================================
     //endregion
 

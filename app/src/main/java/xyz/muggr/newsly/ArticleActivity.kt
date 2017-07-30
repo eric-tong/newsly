@@ -70,7 +70,6 @@ class ArticleActivity : NewslyActivity(), AppBarLayout.OnOffsetChangedListener {
         appBarLayout.addOnOffsetChangedListener(this)
     }
 
-
     //region Listener methods
     //=======================================================================================
 
