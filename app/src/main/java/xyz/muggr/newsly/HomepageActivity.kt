@@ -8,8 +8,9 @@ import xyz.muggr.newsly.Articles.ArticleList
 import xyz.muggr.newsly.Managers.ArticleQueueManager
 import xyz.muggr.newsly.Managers.CardSwipeManager
 import xyz.muggr.newsly.Managers.DatabaseManager
+import xyz.muggr.newsly.Tasks.GetArticleListTask
 
-class HomepageActivity : NewslyActivity(), CardSwipeManager.SwipableCards, ArticleQueueManager.ArticleQueueListener {
+class HomepageActivity : NewslyActivity(), CardSwipeManager.SwipableCards, GetArticleListTask.ArticleListListener {
 
     private lateinit var databaseManager: DatabaseManager
     private lateinit var cardSwipeManager: CardSwipeManager
@@ -27,7 +28,7 @@ class HomepageActivity : NewslyActivity(), CardSwipeManager.SwipableCards, Artic
         cardSwipeManager = CardSwipeManager(this, swipableCard, transitionCard)
         articleQueueManager = ArticleQueueManager(this)
 
-        // Load cards
+        // Load CARDS
         articleQueueManager.load(this)
     }
 
@@ -50,8 +51,7 @@ class HomepageActivity : NewslyActivity(), CardSwipeManager.SwipableCards, Artic
     //region Article queue methods
     //=======================================================================================
 
-    override fun onArticleQueueLoaded(articleQueue: ArticleList) {
-
+    override fun onArticleListLoadSuccess(articleQueue: ArticleList) {
         if (articleQueue.isEmpty()) {
             // TODO SHOW CONNECTION ERROR
             return
@@ -65,6 +65,10 @@ class HomepageActivity : NewslyActivity(), CardSwipeManager.SwipableCards, Artic
             transitionCard.setArticle(articleQueue[1])
         } else
             transitionCard.visibility = View.INVISIBLE
+
+    }
+
+    override fun onArticleListLoadFail() {
 
     }
 

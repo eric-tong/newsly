@@ -6,11 +6,11 @@ import xyz.muggr.newsly.BuildConfig
 import xyz.muggr.newsly.Managers.ApiManager
 import java.lang.ref.WeakReference
 
-class GetArticleListTask(private val articleListListener: WeakReference<ArticleListListener>) : AsyncTask<Void, Void, ArticleList>() {
+class GetArticleListTask(private val queryParams: ApiManager.QueryParams, private val articleListListener: WeakReference<ArticleListListener>, private var updateList: ArticleList? = null) : AsyncTask<Void, Void, ArticleList>() {
 
     override fun doInBackground(vararg params: Void): ArticleList? {
         try {
-            return ApiManager.getCards()
+            return ApiManager.getArticleList(queryParams)
         } catch (e: Exception) {
             if (BuildConfig.DEBUG)
                 e.printStackTrace()
@@ -22,17 +22,18 @@ class GetArticleListTask(private val articleListListener: WeakReference<ArticleL
     override fun onPostExecute(articleList: ArticleList?) {
         super.onPostExecute(articleList)
         if (articleList != null && articleList.isNotEmpty()) {
-            articleListListener.get()?.onArticleListLoaded(articleList)
+            articleListListener.get()?.onArticleListLoadSuccess(articleList)
+            if (updateList != null) (updateList as ArticleList).addAll(articleList)
         } else
-            articleListListener.get()?.onArticleListFail()
+            articleListListener.get()?.onArticleListLoadFail()
     }
 
     //region Interfaces
     //=======================================================================================
 
     interface ArticleListListener {
-        fun onArticleListLoaded(articleQueue: ArticleList)
-        fun onArticleListFail()
+        fun onArticleListLoadSuccess(articleQueue: ArticleList)
+        fun onArticleListLoadFail()
     }
 
     //=======================================================================================

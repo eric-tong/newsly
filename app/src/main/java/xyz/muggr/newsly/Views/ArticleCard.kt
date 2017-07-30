@@ -141,11 +141,11 @@ class ArticleCard : FrameLayout {
         timeTv.text = MathUtil.getHumanTime(article.redditCreated * 1000)
 
         //        // Set flags
-        //        if (article.get() > 0) {
+        //        if (ARTICLE.get() > 0) {
         //            flagTv.setVisibility(View.VISIBLE);
-        //            if ((article.getFlags() & Article.Flag.IS_NSFW) == Article.Flag.IS_NSFW) {
+        //            if ((ARTICLE.getFlags() & Article.Flag.IS_NSFW) == Article.Flag.IS_NSFW) {
         //                flagTv.setText("nsfw");
-        //            } else if ((article.getFlags() & Article.Flag.IS_TOP_NEWS) == Article.Flag.IS_TOP_NEWS) {
+        //            } else if ((ARTICLE.getFlags() & Article.Flag.IS_TOP_NEWS) == Article.Flag.IS_TOP_NEWS) {
         //                flagTv.setText("top news");
         //            }
         //        } else

@@ -17,8 +17,8 @@ object ApiManager {
     //region Getters
     //=======================================================================================
     @Throws(IOException::class, JSONException::class)
-    fun getArticleListFromUrl(url: String): ArticleList {
-        val connection = URL(url).openConnection()
+    fun getArticleList(queryParams: QueryParams): ArticleList {
+        val connection = URL(ROOT + queryParams.toURL()).openConnection()
         connection.connectTimeout = 10000
         connection.readTimeout = 10000
         connection.connect()
@@ -29,26 +29,40 @@ object ApiManager {
             jsonBuilder.append(inputString)
             inputString = streamReader.readLine()
         }
-        println(jsonBuilder.toString())
         val articles = ArticleList()
         val listingJson = JSONArray(jsonBuilder.toString())
         val gson = Gson()
-        for (i in 0..listingJson.length() - 1) {
-            articles.add(gson.fromJson(listingJson.getJSONObject(i).toString(), Article::class.java))
-        }
+        (0..listingJson.length() - 1).mapTo(articles) { gson.fromJson(listingJson.getJSONObject(it).toString(), Article::class.java) }
 
         return articles
     }
 
-    fun getArticle(redditId: String): ArticleList {
-        return getArticleListFromUrl(ROOT + "article/" + redditId)
+    //=======================================================================================
+    //endregion
+
+    //region Helpers
+    //=======================================================================================
+
+    class QueryParams(private val type: QueryTypes, private val redditId: String? = null) {
+        fun toURL(): String {
+            var url: String = ""
+            when (type) {
+                QueryTypes.ARTICLE -> {
+                    url += "article/"
+                    url += redditId
+                }
+                QueryTypes.CARDS -> url += "cards"
+            }
+            return url
+        }
     }
 
-    fun getCards(): ArticleList {
-        return getArticleListFromUrl(ROOT + "cards")
+    enum class QueryTypes {
+        CARDS, ARTICLE
     }
 
     //=======================================================================================
     //endregion
+
 
 }
