@@ -19,7 +19,8 @@ def cards(request):
                                                      'article_top_image AS articleTopImage, '
                                                      'reddit_flair AS redditFlair, '
                                                      'reddit_created AS redditCreated '
-                                                     'FROM NewslyApi_redditarticle'))
+                                                     'FROM NewslyApi_redditarticle '
+                                                     'ORDER BY time_retrieved DESC, reddit_rank'))
 
     return HttpResponse(json.dumps(reddit_articles, default=json_default))
 

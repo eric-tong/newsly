@@ -10,7 +10,7 @@ import xyz.muggr.newsly.NewslyActivity
 
 class ArticleQueueManager(private val activity: NewslyActivity) {
 
-    private val articleQueue: ArticleList
+    private var articleQueue: ArticleList
     private val database: SQLiteDatabase
 
     init {
@@ -24,35 +24,7 @@ class ArticleQueueManager(private val activity: NewslyActivity) {
     fun load(listener: ArticleQueueListener) {
 
         if (articleQueue.size < 2)
-            object : AsyncTask<Void, Void, ArticleList>() {
-                override fun doInBackground(vararg params: Void): ArticleList? {
-                    try {
-                        return ApiManager.redditArticles
-                    } catch (e: Exception) {
-                        if (BuildConfig.DEBUG)
-                            e.printStackTrace()
-                        return null
-                    }
-
-                }
-
-                override fun onPostExecute(articleList: ArticleList?) {
-                    super.onPostExecute(articleList)
-                    if (articleList != null) {
-                        articleQueue.addAll(articleList)
-                    }
-                    listener.onArticleQueueLoaded(articleQueue)
-
-                    if (BuildConfig.DEBUG)
-                        for (i in articleQueue.indices) {
-                            Log.d(
-                                    String.format("Queue %02d", i),
-                                    articleQueue[i].redditTitle
-                            )
-                        }
-                }
-
-            }.execute()
+            GetArticleListTask(articleQueue, listener).execute()
         else
             listener.onArticleQueueLoaded(articleQueue)
 
@@ -64,6 +36,43 @@ class ArticleQueueManager(private val activity: NewslyActivity) {
         }
     }
 
+    //=======================================================================================
+    //endregion
+    
+    //region Asynctasks
+    //=======================================================================================
+
+    class GetArticleListTask(private val articleQueue: ArticleList, private val listener: ArticleQueueListener): AsyncTask<Void, Void, ArticleList>() {
+
+        override fun doInBackground(vararg params: Void): ArticleList? {
+            try {
+                return ApiManager.redditArticles
+            } catch (e: Exception) {
+                if (BuildConfig.DEBUG)
+                    e.printStackTrace()
+                return null
+            }
+
+        }
+
+        override fun onPostExecute(articleList: ArticleList?) {
+            super.onPostExecute(articleList)
+            if (articleList != null) {
+                articleQueue.addAll(articleList)
+            }
+            listener.onArticleQueueLoaded(articleQueue)
+
+            if (BuildConfig.DEBUG)
+                for (i in articleQueue.indices) {
+                    Log.d(
+                            String.format("Queue %02d", i),
+                            articleQueue[i].redditTitle
+                    )
+                }
+        }
+
+    }
+    
     //=======================================================================================
     //endregion
 
