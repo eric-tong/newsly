@@ -14,11 +14,7 @@ import xyz.muggr.newsly.Utils.MathUtil
 import xyz.muggr.newsly.Views.ArticleCard
 
 
-class CardSwipeManager
-//region CONSTRUCTORS
-//=======================================================================================
-
-(private val activity: SwipableCards, private val swipableCard: ArticleCard, private val transitionCard: ArticleCard) : View.OnTouchListener {
+class CardSwipeManager(private val activity: SwipableCards, private val swipableCard: ArticleCard, private val transitionCard: ArticleCard) : View.OnTouchListener {
 
     private val SCREEN_SIZE: IntArray
     private val DP_1: Int
@@ -48,11 +44,7 @@ class CardSwipeManager
         // SET TRANSITION CARD SCALE
         transitionCard.scaleX = TRANSITION_CARD_SCALE
         transitionCard.scaleY = TRANSITION_CARD_SCALE
-    }// GET RESOURCES
-    // GET VIEWS
-
-    //=======================================================================================
-    //endregion
+    }
 
     //region GESTURE METHODS
     //=======================================================================================

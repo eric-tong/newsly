@@ -116,15 +116,16 @@ class ArticleCard : FrameLayout {
 
         // Set image
         headlineBkg.visibility = View.INVISIBLE
-        Picasso.with(context).load(article.articleTopImage).into(heroIv, object : Callback {
-            override fun onSuccess() {
-                headlineBkg.visibility = View.VISIBLE
-            }
+        if (!article.articleTopImage.isNullOrEmpty())
+            Picasso.with(context).load(article.articleTopImage).into(heroIv, object : Callback {
+                override fun onSuccess() {
+                    headlineBkg.visibility = View.VISIBLE
+                }
 
-            override fun onError() {
+                override fun onError() {
 
-            }
-        })
+                }
+            })
 
         // Set tag
         if (currentArticle.redditFlair != null) {
