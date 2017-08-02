@@ -5,7 +5,6 @@ import android.support.constraint.ConstraintLayout
 import android.support.design.widget.AppBarLayout
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.transition.Fade
 import android.view.View
 import com.squareup.picasso.Picasso
@@ -13,11 +12,18 @@ import kotlinx.android.synthetic.main.act_article.*
 import kotlinx.android.synthetic.main.act_article_header.*
 import xyz.muggr.newsly.Adapters.ArticleAdapter
 import xyz.muggr.newsly.Articles.Article
+import xyz.muggr.newsly.Articles.ArticleList
+import xyz.muggr.newsly.Managers.ApiManager
+import xyz.muggr.newsly.Tasks.GetArticleListTask
 import xyz.muggr.newsly.Utils.TransitionUtil
+import java.lang.ref.WeakReference
 
-class ArticleActivity : NewslyActivity(), AppBarLayout.OnOffsetChangedListener {
+class ArticleActivity : NewslyActivity(), AppBarLayout.OnOffsetChangedListener, GetArticleListTask.ArticleListListener {
 
     private lateinit var currentArticle: Article
+
+    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var articleAdapter: ArticleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,15 +36,19 @@ class ArticleActivity : NewslyActivity(), AppBarLayout.OnOffsetChangedListener {
         setLightStatusBar()
 
         // Setup RecyclerView
-        val recyclerView = findViewById<View>(R.id.act_article_rv) as RecyclerView
-        val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = ArticleAdapter()
+        layoutManager = LinearLayoutManager(this)
+        articleAdapter = ArticleAdapter(currentArticle)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = articleAdapter
+
+        // Get article content
+        val queryParams = ApiManager.QueryParams(type = ApiManager.QueryTypes.ARTICLE, redditId = currentArticle.redditId)
+        GetArticleListTask(queryParams, WeakReference(this)).execute()
 
         // Set hero image
         articleTopImageIv.setColorFilter(0x33000000)
         if (!currentArticle.articleTopImage.isNullOrEmpty())
-            Picasso.with(this).load(currentArticle.articleTopImage).into(articleTopImageIv)
+            Picasso.with(this).load(currentArticle.articleTopImage).placeholder(R.drawable.bkg_loading_placeholder).into(articleTopImageIv)
         else
             articleTopImageIv.setImageResource(R.drawable.bkg_loading_placeholder)
 
@@ -90,6 +100,14 @@ class ArticleActivity : NewslyActivity(), AppBarLayout.OnOffsetChangedListener {
         articleTopImageIv.translationY = appBarHeight.toFloat() * offset * 0.5f
         redditTitleTv.translationY = appBarHeight.toFloat() * offset * -0.2f
         navBkg.alpha = 0.2f + 0.5f * offset
+    }
+
+    override fun onArticleListLoadSuccess(articleList: ArticleList) {
+        articleAdapter.setCurrentArticle(articleList[0])
+    }
+
+    override fun onArticleListLoadFail() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     //=======================================================================================

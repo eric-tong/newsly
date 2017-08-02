@@ -1,5 +1,7 @@
 from django.contrib import admin
 
-from .models import RedditArticle
+from NewslyApi.models import RedditArticle
+from data.models import Log
 
 admin.site.register(RedditArticle)
+admin.site.register(Log)

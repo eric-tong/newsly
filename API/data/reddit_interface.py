@@ -7,6 +7,7 @@ import requests
 from newspaper import Article, ArticleException
 
 from NewslyApi.models import RedditArticle
+from data.models import Log
 
 
 class Downloader(object):
@@ -62,6 +63,8 @@ class Downloader(object):
             article.nlp()
             reddit_article.article_keywords = article.keywords
             reddit_article.save()
+
+        Log(articlesAdded=len(reddit_data['data']['children'])).save()
 
         print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Complete feed getter')
 

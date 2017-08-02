@@ -32,7 +32,7 @@ class GetArticleListTask(private val queryParams: ApiManager.QueryParams, privat
     //=======================================================================================
 
     interface ArticleListListener {
-        fun onArticleListLoadSuccess(articleQueue: ArticleList)
+        fun onArticleListLoadSuccess(articleList: ArticleList)
         fun onArticleListLoadFail()
     }
 

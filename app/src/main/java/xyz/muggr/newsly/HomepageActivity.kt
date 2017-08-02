@@ -51,18 +51,18 @@ class HomepageActivity : NewslyActivity(), CardSwipeManager.SwipableCards, GetAr
     //region Article queue methods
     //=======================================================================================
 
-    override fun onArticleListLoadSuccess(articleQueue: ArticleList) {
-        if (articleQueue.isEmpty()) {
+    override fun onArticleListLoadSuccess(articleList: ArticleList) {
+        if (articleList.isEmpty()) {
             // TODO SHOW CONNECTION ERROR
             return
         }
 
-        val currentArticle = articleQueue[0]
+        val currentArticle = articleList[0]
         swipableCard.setArticle(currentArticle)
 
-        if (articleQueue.size > 1) {
+        if (articleList.size > 1) {
             transitionCard.visibility = View.VISIBLE
-            transitionCard.setArticle(articleQueue[1])
+            transitionCard.setArticle(articleList[1])
         } else
             transitionCard.visibility = View.INVISIBLE
 

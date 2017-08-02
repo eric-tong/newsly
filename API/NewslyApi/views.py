@@ -1,10 +1,9 @@
 import json
-import os
 
 from django.http import HttpResponse
 
 from NewslyApi.models import RedditArticle
-from NewslyApi.reddit_interface import Downloader
+from data.reddit_interface import Downloader
 
 
 def cards(request):

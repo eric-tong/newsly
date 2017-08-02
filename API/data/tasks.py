@@ -1,7 +1,8 @@
-import schedule
 import time
 
-from NewslyApi.reddit_interface import Downloader
+import schedule
+
+from data.reddit_interface import Downloader
 
 
 def start():
@@ -17,3 +18,8 @@ def start():
             time.sleep(60)
     except:
         start()
+
+
+def download_now():
+    reddit_url = 'https://www.reddit.com/r/worldnews/.json?'
+    Downloader.download(reddit_url)
