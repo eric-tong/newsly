@@ -7,7 +7,7 @@ import requests
 from newspaper import Article, ArticleException
 
 from NewslyApi.models import RedditArticle
-from data.models import Log
+from data.models import DatabaseLog
 
 
 class Downloader(object):
@@ -23,6 +23,7 @@ class Downloader(object):
 
         # Save
         current_time = time.time()
+        database_log = DatabaseLog(articlesAdded=len(reddit_data['data']['children'])).save()
         print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Start feed getter')
 
         for index, reddit_post in enumerate(reddit_data['data']['children']):
@@ -64,7 +65,8 @@ class Downloader(object):
             reddit_article.article_keywords = article.keywords
             reddit_article.save()
 
-        Log(articlesAdded=len(reddit_data['data']['children'])).save()
+        database_log.success = True
+        database_log.save()
 
         print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Complete feed getter')
 

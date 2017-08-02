@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from NewslyApi.models import RedditArticle
-from data.models import Log
+from data.models import DatabaseLog
 
 admin.site.register(RedditArticle)
-admin.site.register(Log)
+admin.site.register(DatabaseLog)
