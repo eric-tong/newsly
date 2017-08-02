@@ -3,6 +3,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^api/v1/', include('NewslyApi.urls')),
-    url(r'^admin/data/', include('data.urls')),
     url(r'^admin/', admin.site.urls),
 ]

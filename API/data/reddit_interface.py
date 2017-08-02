@@ -13,6 +13,10 @@ from data.models import DatabaseLog
 class Downloader(object):
     @staticmethod
     def download(reddit_url):
+        # Log database
+        database_log = DatabaseLog()
+        database_log.save()
+
         # Get reddit feed
         reddit_params = {"limit": 100}
         reddit_headers = {'user-agent': 'android:xyz.muggr.newsly.api:v0.0.4 (by /u/regimme)'}
@@ -23,7 +27,7 @@ class Downloader(object):
 
         # Save
         current_time = time.time()
-        database_log = DatabaseLog(articlesAdded=len(reddit_data['data']['children'])).save()
+        article_count = len(reddit_data['data']['children'])
         print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Start feed getter')
 
         for index, reddit_post in enumerate(reddit_data['data']['children']):
@@ -50,6 +54,7 @@ class Downloader(object):
             try:
                 article.parse()
             except ArticleException:
+                article_count -= 1
                 continue
             reddit_article.article_title = article.title
             reddit_article.article_authors = article.authors
@@ -65,6 +70,7 @@ class Downloader(object):
             reddit_article.article_keywords = article.keywords
             reddit_article.save()
 
+        database_log.articlesAdded = article_count
         database_log.success = True
         database_log.save()
 
