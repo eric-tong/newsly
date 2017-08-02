@@ -6,7 +6,7 @@ class Log(models.Model):
     articlesAdded = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.time
+        return str(self.time)
 
     class Meta:
         ordering = ['-time']
