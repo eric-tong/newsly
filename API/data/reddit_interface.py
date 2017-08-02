@@ -89,7 +89,7 @@ class Downloader(object):
         content = content.replace('<b>', '')
         content = content.replace('</b>', '')
 
-        # Content to paragraphs list
+        # Content to contentList list
         paragraph_list = list()
         inside_p_tag = False
         save_to_list = False

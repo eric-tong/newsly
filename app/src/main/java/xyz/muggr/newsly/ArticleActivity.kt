@@ -93,7 +93,8 @@ class ArticleActivity : NewslyActivity(), AppBarLayout.OnOffsetChangedListener, 
         if (appBarHeight == 0) appBarHeight = appBarLayout.height
 
         // Get percentage visibility
-        val offset = verticalOffset.toFloat() / appBarHeight.toFloat() * -1
+        var offset = verticalOffset.toFloat() / appBarHeight.toFloat()
+        offset *= offset
 
         // Animate header
         header.alpha = 1 - offset

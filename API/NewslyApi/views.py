@@ -31,6 +31,7 @@ def article(request, reddit_id):
                                                     'reddit_created AS redditCreated, '
                                                     'reddit_title AS redditTitle, '
                                                     'reddit_flair AS redditFlair, '
+                                                    'article_title AS articleTitle, '
                                                     'article_url AS articleUrl, '
                                                     'article_domain AS articleDomain, '
                                                     'article_text AS articleText, '
