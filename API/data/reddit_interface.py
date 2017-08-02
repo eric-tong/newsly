@@ -5,12 +5,14 @@ import time
 
 import requests
 from newspaper import Article, ArticleException
+from newspaper.article import ArticleDownloadState
 
 from NewslyApi.models import RedditArticle
 from data.models import DatabaseLog
 
 
 class Downloader(object):
+    # noinspection PyBroadException
     @staticmethod
     def download(reddit_url):
         # Log database
@@ -28,11 +30,11 @@ class Downloader(object):
         # Save
         current_time = time.time()
         article_count = len(reddit_data['data']['children'])
-        print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Start feed getter')
+        # print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Start feed getter')
 
         for index, reddit_post in enumerate(reddit_data['data']['children']):
 
-            print('Feed ' + str(index))
+            # print('Feed ' + str(index))
 
             # Add reddit data
             reddit_post_data = reddit_post['data']
@@ -51,11 +53,10 @@ class Downloader(object):
             # Get newspaper data
             article = Article(reddit_article.article_url, keep_article_html=True)
             article.download()
-            try:
-                article.parse()
-            except ArticleException:
+            if article.download_state != ArticleDownloadState.SUCCESS:
                 article_count -= 1
                 continue
+            article.parse()
             reddit_article.article_title = article.title
             reddit_article.article_authors = article.authors
             reddit_article.article_text = Downloader.sanitize_content(article.article_html)
@@ -64,7 +65,7 @@ class Downloader(object):
 
             # Get nlp data
             if not article.is_parsed:
-                print(reddit_article.article_url)
+                # print(reddit_article.article_url)
                 continue
             article.nlp()
             reddit_article.article_keywords = article.keywords
@@ -74,7 +75,7 @@ class Downloader(object):
         database_log.success = True
         database_log.save()
 
-        print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Complete feed getter')
+        # print('Timestamp: {:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now()) + ' Complete feed getter')
 
     @staticmethod
     def sanitize_content(content):
