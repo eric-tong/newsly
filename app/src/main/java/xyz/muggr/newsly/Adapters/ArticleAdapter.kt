@@ -28,7 +28,7 @@ class ArticleAdapter(private var currentArticle: Article) : RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int {
-        if (currentArticle.articleText.isNullOrEmpty()) return 0
+        if (currentArticle.articleSummary.isNullOrEmpty()) return 0
         else return contentList.size
     }
 
@@ -50,7 +50,7 @@ class ArticleAdapter(private var currentArticle: Article) : RecyclerView.Adapter
         contentList = ArrayList()
 
         // Populate content paragraphs
-        val paragraphsJson = JSONArray(article.articleText)
+        val paragraphsJson = JSONArray(article.articleSummary)
         for (i in 0..(paragraphsJson.length() - 1)) {
             contentList.add(SimpleEntry(0, paragraphsJson[i].toString()))
         }

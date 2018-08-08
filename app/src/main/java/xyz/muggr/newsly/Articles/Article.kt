@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Article(var redditId: String, var redditCreated: Long = 0, var redditTitle: String?, var redditFlair: String?, var isRedditNsfw: Boolean = false, var redditScore: Int = 0, // Article fields
-              var articleUrl: String?, var articleDomain: String?, var articleTitle: String?, var articleAuthors: String?, var articleText: String?, var articleTopImage: String?, var articleKeywords: String?, var articlePublishDate: String?, var timeRetrieved: Long = 0) : Parcelable {
+              var articleUrl: String?, var articleDomain: String?, var articleTitle: String?, var articleAuthors: String?, var articleSummary: String?, var articleTopImage: String?, var articleKeywords: String?, var articlePublishDate: String?, var timeRetrieved: Long = 0) : Parcelable {
 
     //region Parcelable methods
     //=======================================================================================
@@ -37,7 +37,7 @@ class Article(var redditId: String, var redditCreated: Long = 0, var redditTitle
         parcel.writeString(articleDomain)
         parcel.writeString(articleTitle)
         parcel.writeString(articleAuthors)
-        parcel.writeString(articleText)
+        parcel.writeString(articleSummary)
         parcel.writeString(articleTopImage)
         parcel.writeString(articleKeywords)
         parcel.writeString(articlePublishDate)

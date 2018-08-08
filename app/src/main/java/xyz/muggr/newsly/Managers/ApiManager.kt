@@ -1,8 +1,10 @@
 package xyz.muggr.newsly.Managers
 
+import android.util.Log
 import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
 import xyz.muggr.newsly.Articles.Article
 import xyz.muggr.newsly.Articles.ArticleList
 import java.io.BufferedReader
@@ -30,7 +32,8 @@ object ApiManager {
             inputString = streamReader.readLine()
         }
         val articles = ArticleList()
-        val listingJson = JSONArray(jsonBuilder.toString())
+        Log.w("JSON", jsonBuilder.toString())
+        val listingJson = JSONObject(jsonBuilder.toString()).getJSONArray("content")
         val gson = Gson()
         (0..listingJson.length() - 1).mapTo(articles) { gson.fromJson(listingJson.getJSONObject(it).toString(), Article::class.java) }
 
